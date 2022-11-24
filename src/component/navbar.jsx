@@ -10,7 +10,7 @@ function navbar() {
     <Navbar bg="light" expand="lg">
       <Container fluid>
         <Navbar.Brand href="#">BackstopIndia</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle />
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
