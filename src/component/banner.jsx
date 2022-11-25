@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Spinner } from 'react-bootstrap'
+import FormModal from './formModel'
 
 const banner = () => {
     return (
@@ -11,8 +12,8 @@ const banner = () => {
                 <h4>Protect your phone against <br /> Accidental && Liquid Damage</h4>
                 <span className='text-danger'>Start from 99 only</span> &nbsp;
                 <Spinner animation="grow" variant="danger" size='sm'/>
-                <br /><br />
-                <Button>Touch with us</Button>
+                <br /><br /> 
+                <FormModal />
             </div>
         </section>
     )
