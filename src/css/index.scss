@@ -47,6 +47,24 @@ body {
     }
 }
 
+.about-section{
+    margin: 10px 5%;
+    display: flex;
+    gap: 50px;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    img{
+        width: 40%;
+        min-width: 400px;
+    }
+
+    .right{
+        font-size: 20px;
+    }
+}
+
+
 .services-card-container {
     display: flex;
     gap: 40px;
@@ -66,10 +84,46 @@ body {
 }
 
 
-@media (max-width:750px) {
+// testimonials section css code 
 
-    .services-card {
-        width: 80% !important;
+
+.testimonial-card-container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    margin: 10px 5%;
+    flex-wrap: wrap;
+}
+
+.testimonial-card { 
+    border: none;  
+    display: flex;
+    width: 370px;
+    justify-content: space-around; 
+    gap: 10px;
+    
+    .testimonial-card-image {
+        width: 70px !important;
+        height: 70px; 
+        margin: 5px;
     }
+}
+ 
 
+
+@media (max-width:750px) { 
+    .services-card, .testimonial-card {
+        width: 80% !important; 
+    } 
+}
+
+
+@media (max-width:900px) {
+    .about-section{
+        flex-direction: column ; 
+        
+        img{
+            width: 100%;
+        }
+    } 
 }

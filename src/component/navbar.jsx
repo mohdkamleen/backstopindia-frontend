@@ -8,7 +8,7 @@ function navbar() {
   return (
     <Navbar expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#">BackstopIndia</Navbar.Brand>
+        <Navbar.Brand href="/">BackstopIndia</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -16,10 +16,10 @@ function navbar() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#">Home</Nav.Link>
-            <Nav.Link href="#about">About</Nav.Link>  
-            <Nav.Link href="#contact">Contact</Nav.Link>  
-            <Nav.Link href="#services">Services</Nav.Link>  
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>  
+            <Nav.Link href="/services">Services</Nav.Link>  
+            <Nav.Link href="/contact">Contact</Nav.Link>  
           </Nav>
           <Form className="d-flex">
             <Form.Control

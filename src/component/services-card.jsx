@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function Services(props) {
+function ServicesCard(props) {
   return (
     <Card className='text-center services-card' > 
       <Card.Body>
@@ -16,4 +16,4 @@ function Services(props) {
   );
 }
 
-export default Services;
+export default ServicesCard;

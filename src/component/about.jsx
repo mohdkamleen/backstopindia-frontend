@@ -1,11 +1,19 @@
 import React from 'react'
+import { Button } from 'react-bootstrap';
 import Card from './services-card'
 function Services() {
     return (
         <>
-            <h2 className='text-center my-4'>Services</h2>
-            <div className='services-card-container mb-5'>
-                <Card title="this is 1st title" disc="this is description we need to change like all content indide that" icon="assest/image/img1.jpg"/> 
+            <h2 className='text-center my-4'>About Us</h2>
+            <div className="about-section">
+                <img src="assest/image/about-undraw.svg" alt="" />
+                <div className="right">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, incidunt? Doloremque alias, ipsum, voluptatem commodi ab enim fugiat corporis aperiam quaerat nobis dolor voluptas magnam esse recusandae fuga, sequi perferendis. Commodi quia dolor nihil, est at pariatur tempore incidunt necessitatibus doloribus praesentium, doloremque harum ullam reiciendis! Numquam quo consectetur itaque.
+                    </p>
+
+                    <Button>Show more</Button>
+                </div>
             </div>
         </>
     );
