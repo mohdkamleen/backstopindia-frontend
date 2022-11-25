@@ -12,9 +12,28 @@ body {
 
 .banner {
   height: 450px;
-  margin: 10px 20px;
+  margin: 10px 5%;
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
   background-blend-mode: screen !important;
+}
+
+.services-card-container {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  margin: 10px 5%;
+  flex-wrap: wrap;
+}
+
+.services-card {
+  width: 300px !important;
+}
+
+@media (max-width: 750px) {
+  .services-card {
+    width: 80% !important;
+    background-color: red;
+  }
 }/*# sourceMappingURL=index.css.map */
