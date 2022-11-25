@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    max-width: 1400px; 
+    display: block;
+    margin: 0 auto;  
+}
+
+.banner{ 
+    height: 450px;  
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-blend-mode: screen !important;
+}
+
+
