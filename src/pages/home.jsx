@@ -10,8 +10,8 @@ const home = () => {
     <>
       <Navbar /> 
       <Banner /> 
-      <About />
-      <Testimonials />
+      <About /> <br />
+      <Testimonials /> <br />
       <Services />
     </>
   )
