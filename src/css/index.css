@@ -82,13 +82,16 @@ body {
 .footer-section div {
   width: 300px;
 }
-.footer-section div h3 {
+.footer-section div h4 {
   color: rgb(226, 226, 226);
 }
-.footer-section div p {
+.footer-section div .footer-item {
   color: rgb(212, 212, 212);
   font-size: 17px;
+}
+.footer-section div p {
   line-height: 17px;
+  color: rgb(212, 212, 212);
 }
 
 .copyright {
@@ -97,6 +100,17 @@ body {
   text-align: center;
   color: white;
   font-size: 20px;
+}
+
+.terms-section {
+  padding: 10px 5%;
+}
+.terms-section h4 {
+  color: rgb(73, 73, 73);
+}
+.terms-section p {
+  font-size: 18px;
+  color: rgb(73, 73, 73);
 }
 
 .testimonial-card-container {

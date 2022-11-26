@@ -93,15 +93,19 @@ body {
  div{
     width: 300px; 
 
-    h3{
+    h4{
         color: rgb(226, 226, 226); 
         
     }
 
-    p{
+    .footer-item{
         color: rgb(212, 212, 212);
-        font-size: 17px;
+        font-size: 17px;  
+    }
+
+    p{
         line-height: 17px;
+        color: rgb(212, 212, 212);
     }
  }
 }
@@ -116,6 +120,18 @@ body {
     font-size: 20px;
 }
 
+
+// terms section 
+.terms-section{
+    padding: 10px 5%;
+    h4{
+        color: rgb(73, 73, 73);
+    }
+    p{
+        font-size: 18px;
+        color: rgb(73, 73, 73);
+    }
+}
 
 // testimonials section css code   
 .testimonial-card-container {
