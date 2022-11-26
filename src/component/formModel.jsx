@@ -4,10 +4,23 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
 function FormModal() {
+    const defaultValue = {
+        name : "",
+        email : "",
+        phone : ""
+    }
     const [show, setShow] = useState(false);
+    const [agreed, setAgreed] = useState(false);
+    const [formValue, setFormValue] = useState(defaultValue);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleChange = (e) => {
+        
+    }
+    const handleSubmit = () => {
+
+    }
 
     return (
         <>
@@ -23,13 +36,13 @@ function FormModal() {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter name" />
+                            <Form.Control name='name' type="text" placeholder="Enter name" />
                         </Form.Group>
 
 
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control name="email" type="email" placeholder="Enter email" />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -37,11 +50,11 @@ function FormModal() {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Phone</Form.Label>
-                            <Form.Control type="tel" placeholder="Enter phone" />
+                            <Form.Control name='phone' type="tel" placeholder="Enter phone" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Are you sure want to call from us" />
+                            <Form.Check checked={agreed} type="checkbox" label="Are you sure want to call from us" />
                         </Form.Group>
                     </Form>
 
@@ -50,7 +63,7 @@ function FormModal() {
                     <Button variant="secondary" size="sm" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="primary" size="sm" onClick={handleClose}>
+                    <Button onClick={handleSubmit} variant="primary" size="sm" >
                         Submit and get call from us
                     </Button>
                 </Modal.Footer>

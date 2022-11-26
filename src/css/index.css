@@ -90,7 +90,8 @@ body {
   font-size: 17px;
 }
 .footer-section div p {
-  line-height: 17px;
+  line-height: 20px;
+  font-size: 17px;
   color: rgb(212, 212, 212);
 }
 
@@ -100,6 +101,7 @@ body {
   text-align: center;
   color: white;
   font-size: 20px;
+  margin: 0;
 }
 
 .terms-section {
