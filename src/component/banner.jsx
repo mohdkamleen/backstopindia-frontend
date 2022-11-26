@@ -9,7 +9,7 @@ const banner = () => {
             <div className="right">
                 <h3>Mobile protection plan</h3>
                 <br />
-                <h4>Protect your phone against <br /> Accidental && Liquid Damage</h4>
+                <h4>Protect your phone against <br /> Accidental & Liquid Damage</h4>
                 <span className='text-danger'>Start from 99 only</span> &nbsp;
                 <Spinner animation="grow" variant="danger" size='sm'/>
                 <br /><br /> 
