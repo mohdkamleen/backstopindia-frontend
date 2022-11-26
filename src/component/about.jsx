@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button } from 'react-bootstrap';
-import Card from './services-card'
+import { Button } from 'react-bootstrap'; 
 function Services() {
     return (
         <>
