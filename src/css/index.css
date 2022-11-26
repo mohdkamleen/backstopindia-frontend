@@ -47,7 +47,7 @@ body {
   display: flex;
   gap: 50px;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
 }
 .about-section img {
   width: 40%;
@@ -71,6 +71,32 @@ body {
 .services-card .services-card-icon {
   width: 100px;
   margin-bottom: 10px;
+}
+
+.footer-section {
+  padding: 20px 5%;
+  background: rgb(106, 106, 106);
+  display: flex;
+  justify-content: center;
+}
+.footer-section div {
+  width: 300px;
+}
+.footer-section div h3 {
+  color: rgb(226, 226, 226);
+}
+.footer-section div p {
+  color: rgb(212, 212, 212);
+  font-size: 17px;
+  line-height: 17px;
+}
+
+.copyright {
+  background: rgb(106, 106, 106);
+  padding-bottom: 20px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
 }
 
 .testimonial-card-container {
@@ -98,8 +124,16 @@ body {
   .services-card, .testimonial-card {
     width: 80% !important;
   }
+  .footer-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }
 @media (max-width: 900px) {
+  .contact-page-image {
+    display: none;
+  }
   .about-section {
     flex-direction: column;
   }

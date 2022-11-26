@@ -1,16 +1,16 @@
 import React from 'react'
-import Navbar from '../component/navbar' 
-import Services from '../component/services'
-import Banner from '../component/banner'
-import About from '../component/about'
+import Navbar from '../component/navbar'  
+import ContactPage from '../component/contact'
+import Footer from '../component/footer'
 
-const home = () => {
+const Contact = () => {
   return (
     <>
       <Navbar />  
-      <About /> 
+      <ContactPage /> 
+      <Footer />
     </>
   )
 }
 
-export default home
+export default Contact
