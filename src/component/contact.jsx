@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap';
+import {FaLocationArrow, FaMailBulk, FaPhone, FaSearchLocation} from 'react-icons/fa'
 function Contact() {
     return (
         <>
@@ -35,9 +36,9 @@ function Contact() {
 
             {/* address details  */}
             <p style={{margin:"20px 5%", fontSize:"20px",fontWeight:"500"}}>
-                +91 4566534567 <br />
-                contact@gmail.com <br />
-                Sitapur Rd, Sherwani Nagar, Diguria, Aziz Nagar, Lucknow, Uttar Pradesh 226021
+               <FaPhone /> &nbsp; +91 4566534567 <br />
+            <FaMailBulk /> &nbsp; contact@gmail.com <br />
+              <FaSearchLocation /> &nbsp;  Sitapur Rd, Sherwani Nagar, Diguria, Aziz Nagar, Lucknow, Uttar Pradesh 226021
             </p>
    </>
     );
