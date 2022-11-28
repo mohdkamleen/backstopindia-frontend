@@ -24,7 +24,7 @@ function Contact() {
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Your query</Form.Label>
-                        <Form.Control type="tel" placeholder="Type your problem" />
+                        <Form.Control as="textarea" rows={3} placeholder="Type your problem" />
                     </Form.Group>
 
 
