@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap';
-import {FaLocationArrow, FaMailBulk, FaPhone, FaSearchLocation} from 'react-icons/fa'
+import { FaMailBulk, FaPhone, FaSearchLocation} from 'react-icons/fa'
 function Contact() {
     return (
         <>
