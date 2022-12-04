@@ -8,7 +8,7 @@ function navbar() {
   return (
     <Navbar expand="lg">
       <Container fluid>
-        <Navbar.Brand href="/"> <font size="5" color="blue">B</font>ackstop<font size="5" color="blue">I</font>ndia</Navbar.Brand>
+        <Navbar.Brand href="/"> <font size="5" color="#0d6efd">B</font>ackstop<font size="5" color="#0d6efd">I</font>ndia</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse id="navbarScroll">
           <Nav
