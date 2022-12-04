@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { registeUser } from '../redux/slice/user';
 
 function FormModal() {
     const defaultValue = {
@@ -10,30 +12,38 @@ function FormModal() {
         email: "",
         phone: ""
     }
+
+    const dispatch = useDispatch()
     const [show, setShow] = useState(false);
     const [agreed, setAgreed] = useState(false);
     const [formValue, setFormValue] = useState(defaultValue);
-    useEffect(() => { 
+
+    useEffect(() => {
         return () => setFormValue(defaultValue);
     }, []);
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleChange = (e) => {
-        setFormValue({ ...formValue, [e.target.name]: e.target.value }) 
+        setFormValue({ ...formValue, [e.target.name]: e.target.value })
     }
     const handleAgreed = () => {
         setAgreed(!agreed)
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        if (formValue.name == "" || formValue.email == "" || formValue.phone == "") {
-           return toast.warn("All feilds are required")
+        if (formValue.name === "" || formValue.email === "" || formValue.phone === "") {
+            return toast.warn("All feilds are required")
         }
-        if(!agreed) return toast.warn("Please read our condition")
-        toast.success("Success")
-        setShow(false)
-        setAgreed(false)
-        setFormValue(defaultValue)
+        if (!agreed) return toast.warn("Please read our condition")
+        const res = await dispatch(registeUser(formValue))
+        if (res) {
+            console.log(res);
+            toast.success("Success")
+            setShow(false)
+            setAgreed(false)
+            setFormValue(defaultValue)
+        }
     }
 
     return (

@@ -1,6 +1,4 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-
+ 
 function TestimonialsCard(props) {
   return (
     <div className='testimonial-card' >  

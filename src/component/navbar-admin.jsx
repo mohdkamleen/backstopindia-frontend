@@ -1,0 +1,33 @@
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar'; 
+
+function navbar() {
+  return (
+    <Navbar expand="lg">
+      <Container fluid>
+        <Navbar.Brand href="/"> <font size="5" color="#0d6efd">B</font>ackstop<font size="5" color="#0d6efd">I</font>ndia</Navbar.Brand>
+       
+          <Navbar.Toggle />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="m-auto"
+            style={{ maxHeight: '100px' }}
+            navbarScroll
+          >
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/admin/user">NewUser</Nav.Link>  
+            <Nav.Link href="/admin/">ContactedUser</Nav.Link>  
+            <Nav.Link href="/admin/">ServiseUser</Nav.Link>  
+            <Nav.Link href="/admin/query">Query</Nav.Link>  
+            <Nav.Link href="/admin/claim">Claim</Nav.Link>  
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+}
+
+export default navbar;

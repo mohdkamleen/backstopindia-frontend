@@ -18,7 +18,7 @@ function Contact() {
     } 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (formValue.name == "" || formValue.email == "" || formValue.query == "") {
+        if (formValue.name === "" || formValue.email === "" || formValue.query === "") {
            return toast.warn("All feilds are required")
         } 
         toast.success("Success")  
