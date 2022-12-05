@@ -16,11 +16,10 @@ function navbar() {
             className="m-auto"
             style={{ maxHeight: '100px' }}
             navbarScroll
-          >
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/admin/user">NewUser</Nav.Link>  
-            <Nav.Link href="/admin/">ContactedUser</Nav.Link>  
-            <Nav.Link href="/admin/">ServiseUser</Nav.Link>  
+          > 
+            <Nav.Link href="/admin/newUser">NewUser</Nav.Link>  
+            <Nav.Link href="/admin/verifiedUser">VerifiedUser</Nav.Link>  
+            <Nav.Link href="/admin/servicesUser">ServiseUser</Nav.Link>  
             <Nav.Link href="/admin/query">Query</Nav.Link>  
             <Nav.Link href="/admin/claim">Claim</Nav.Link>  
           </Nav>
