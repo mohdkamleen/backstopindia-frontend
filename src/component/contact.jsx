@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { FaMailBulk, FaPhone, FaSearchLocation } from 'react-icons/fa'
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { contacUser } from '../redux/slice/contact';
 function Contact() {
 
+    const dispatch = useDispatch() 
     const defaultValue = {
         name: "",
-        email: "",
+        contact: "",
         query: ""
     }  
     const [formValue, setFormValue] = useState(defaultValue);
@@ -16,13 +19,13 @@ function Contact() {
     const handleChange = (e) => {
         setFormValue({ ...formValue, [e.target.name]: e.target.value }) 
     } 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
-        if (formValue.name === "" || formValue.email === "" || formValue.query === "") {
+        if (formValue.name === "" || formValue.contact === "" || formValue.query === "") {
            return toast.warn("All feilds are required")
         } 
-        toast.success("Success")  
-        setFormValue(defaultValue)
+        const res = await dispatch(contacUser(formValue))
+        res && toast.success("Success") // && setFormValue(defaultValue) 
     }
 
     return (
@@ -42,7 +45,7 @@ function Contact() {
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address or Phone</Form.Label>
-                        <Form.Control name='email' type="text" onChange={handleChange} placeholder="Enter email or phone" />
+                        <Form.Control name='contact' type="text" onChange={handleChange} placeholder="Enter email or phone" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">

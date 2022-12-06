@@ -8,6 +8,7 @@ import Terms from './pages/terms'
 import Admin from './admin'
 import NewUser from './admin/newUser'
 import VerifiedUser from './admin/verifiedUser'
+import Query from './admin/query'
 
 
 const App = () => {
@@ -26,7 +27,7 @@ const App = () => {
           <Route path="newUser" element={<NewUser />} />
           <Route path="verifiedUser" element={<VerifiedUser />} />
           <Route path="servicesUser" element={<NewUser />} />
-          <Route path="query" element={<NewUser />} />
+          <Route path="query" element={<Query />} />
           <Route path="claim" element={<NewUser />} />
         </Route>
 

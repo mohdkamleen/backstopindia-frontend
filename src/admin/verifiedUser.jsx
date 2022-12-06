@@ -4,6 +4,7 @@ import { AllUser } from '../redux/slice/admin'
 import Table from 'react-bootstrap/Table'; 
 import { format } from 'timeago.js';
 import moment from 'moment/moment';
+import { Link } from 'react-router-dom';
 
 const VerifiedUser = () => {
     const dispatch = useDispatch()
@@ -15,8 +16,7 @@ const VerifiedUser = () => {
     }
     useEffect(() => {
         getAllUser()
-    }, [])
-    console.log(data);
+    }, []) 
     return (
         <> 
             <h4 className='text-center pb-3'>Verified users table</h4>
@@ -30,14 +30,15 @@ const VerifiedUser = () => {
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {
                         data?.map((e, i) => {
                             {
                                return e.verified && (
-                                    <tr> 
+                                    <tr key={e.id}> 
                                         <td>{e.profile.name}</td>
                                         <td>{e.profile.email}</td>
-                                        <td><a href={`tel:+91${e.profile.phone}`}>{e.profile.phone}</a></td>
+                                        <td><Link to={`tel:+91${e.profile.phone}`}>{e.profile.phone}</Link></td>
                                         <td>{moment(e.updatedAt).format("LLLL")}</td> 
                                     </tr>
                                 )

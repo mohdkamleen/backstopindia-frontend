@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { AllUser, ChangeVerified } from '../redux/slice/admin'
-import Table from 'react-bootstrap/Table';
-import { AiOutlineCheck } from 'react-icons/ai'
-import { format } from 'timeago.js';
-import Button from 'react-bootstrap/Button';
+import { AllQuery } from '../redux/slice/admin'
+import Table from 'react-bootstrap/Table'; 
+import { format } from 'timeago.js'; 
 
-const NewUser = () => {
+const Query = () => {
     const dispatch = useDispatch()
     const [data, setData] = useState([])
 
     const getAllUser = async () => {
-        const res = await dispatch(AllUser())
+        const res = await dispatch(AllQuery())
         setData(res?.payload)
     }
     useEffect(() => {
         getAllUser() 
     }, [])
-
-    const changeVerified = async (e) => {
-        const res = await dispatch(ChangeVerified(e))
-        console.log(res);
-    }
+ 
 
     return (
         <>
@@ -29,11 +23,11 @@ const NewUser = () => {
             <Table style={{ width: "90%", margin: "auto" }} className='text-center' responsive bordered hover size="sm">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Requested At</th>
-                        <th>Move Verified</th>
+                        <th>Contact</th>
+                        <th>Query</th>
+                        <th>Contacted At</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -43,11 +37,11 @@ const NewUser = () => {
                             {
                                 return !e.verified && (
                                     <tr key={e.id}>
-                                        <td>{e.profile.name}</td>
-                                        <td>{e.profile.email}</td>
-                                        <td><a href={`tel:+91${e.profile.phone}`}>{e.profile.phone}</a></td>
+                                        <td>{i+1}</td>
+                                        <td>{e.name}</td>
+                                        <td>{e.contact}</td>
+                                        <td>{e.query}</td>
                                         <td>{format(e.createdAt)}</td>
-                                        <td><Button onClick={() => changeVerified(e)} variant="outline-success" className='btn-sm' style={{ width: "100px" }}><AiOutlineCheck size={15} /></Button></td>
                                     </tr>
                                 )
                             }
@@ -60,4 +54,4 @@ const NewUser = () => {
     )
 }
 
-export default NewUser
+export default Query

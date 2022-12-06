@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { AllUser } from '../redux/slice/admin'
-import Table from 'react-bootstrap/Table';
-import Navbar from '../component/navbar-admin'
-import { format } from 'timeago.js';
+import { AllUser } from '../redux/slice/admin' 
+import Navbar from '../component/navbar-admin' 
 import { Outlet } from 'react-router-dom';
 
 const Admin = () => {
@@ -16,8 +14,7 @@ const Admin = () => {
     }
     useEffect(() => {
         getAllUser()
-    }, [])
-    console.log(data);
+    }, []) 
     return (
         <>
             <Navbar />  <br />

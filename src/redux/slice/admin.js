@@ -44,5 +44,7 @@ export const authSlice = createSlice({
     },
 });
  
+export const AllQuery = (data) => authenticateUser({ method: 'get', endpoint: 'admin/query', data }); 
 export const AllUser = (data) => authenticateUser({ method: 'get', endpoint: 'admin/user', data }); 
+export const ChangeVerified = (data) => authenticateUser({ method: 'patch', endpoint: 'admin/verified', data }); 
 export default authSlice.reducer;   
