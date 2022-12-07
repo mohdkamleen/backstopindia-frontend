@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
 import Home from './pages/home'
-import About from './pages/about'
+import Faq from './pages/faq'
 import Contact from './pages/contact'
 import Services from './pages/services'
 import Terms from './pages/terms'
@@ -17,7 +17,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path="about" element={<About />} />
+        <Route path="faq" element={<Faq />} />
         <Route path="contact" element={<Contact />} />
         <Route path="services" element={<Services />} />
         <Route path="terms" element={<Terms />} />

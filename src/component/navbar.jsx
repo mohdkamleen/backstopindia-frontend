@@ -17,9 +17,9 @@ function navbar() {
             navbarScroll
           >
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>  
             <Nav.Link href="/services">Services</Nav.Link>  
             <Nav.Link href="/contact">Contact</Nav.Link>  
+            <Nav.Link href="/faq">FAQ</Nav.Link>  
           </Nav>
           <Form className="d-flex">
             <Form.Control
