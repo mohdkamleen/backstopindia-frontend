@@ -4,8 +4,10 @@ import FormModal from './formModel'
 
 const banner = () => {
     return (
-        <section className='banner' style={{ background: "url(assest/image/crack-phone.jpg), linear-gradient(to right,rgba(0,0,0,0),rgba(255,255,255,.9))" }}>
-            <div className="left"></div>
+        <section className='banner' style={{ background: "url(ass est/image/crack-phone.jpg), linear-gradient(to right,rgba(0,0,0,0),rgba(255,255,255,.9))" }}>
+            <div className="left">
+                <img src="assest/image/crackimagephone.png" alt="" />
+            </div>
             <div className="right">
                 <h3>Mobile protection plan</h3>
                 <br />

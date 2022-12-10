@@ -10,6 +10,8 @@ function Testimonials() {
                 <Card name="Mohd Kamleen" message="this is description we need to change like all content indide that" image="assest/image/user.png" />
                 <Card name="Mohd Affan" message="this is description we need to change like all content indide that" image="assest/image/user.png" />
                 <Card name="Mohd Tabish" message="this is description we need to change like all content indide that" image="assest/image/user.png" />
+                <Card name="Mohd Tabish" message="this is description we need to change like all content indide that" image="assest/image/user.png" />
+                <Card name="Mohd Tabish" message="this is description we need to change like all content indide that" image="assest/image/user.png" />
             </div>
         </>
     );

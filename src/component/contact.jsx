@@ -22,10 +22,10 @@ function Contact() {
     const handleSubmit = async(e) => {
         e.preventDefault()
         if (formValue.name === "" || formValue.contact === "" || formValue.query === "") {
-           return toast.warn("All feilds are required")
+           return toast.warn("Something went wrong.")
         } 
         const res = await dispatch(contacUser(formValue))
-        res && toast.success("Success") // && setFormValue(defaultValue) 
+        res && toast.success("Success") && setFormValue(defaultValue) 
     }
 
     return (
@@ -40,8 +40,7 @@ function Contact() {
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Name</Form.Label>
                         <Form.Control name='name' onChange={handleChange} type="text" placeholder="Enter name" />
-                    </Form.Group>
-
+                    </Form.Group> 
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address or Phone</Form.Label>
@@ -51,8 +50,7 @@ function Contact() {
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Your query</Form.Label>
                         <Form.Control name='query' as="textarea" rows={3} onChange={handleChange} placeholder="Type your problem" />
-                    </Form.Group>
-
+                    </Form.Group> 
 
                     <Button onClick={handleSubmit}>Submit</Button>
                 </Form>
