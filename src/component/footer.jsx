@@ -13,9 +13,9 @@ function Footer() {
                  </div><br />
                  <div>
                     <h4>Our Company</h4>
-                    <Link to="/about" className='footer-item'>About Us</Link><br />
                     <Link to="/services" className='footer-item'>Services</Link><br />
                     <Link to="/contact" className='footer-item'>Contact Us</Link><br />
+                    <Link to="/faq" className='footer-item'>FAQ's</Link><br />
                     <Link to="/career" className='footer-item'>Carrers</Link><br />
                     <Link to="/blog" className='footer-item'>Blogs</Link> <br />
                  </div><br />
