@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Spinner } from 'react-bootstrap'
 import FormModal from './formModel'
+import PlanModal from './planModel'
 
 const banner = () => {
     return (
@@ -16,7 +17,8 @@ const banner = () => {
                 <Spinner animation="grow" variant="danger" size='sm'/>
                 <br /><br /> 
                 <FormModal />
-                &nbsp;&nbsp; <Button>SHOW MY PLANS</Button>
+                <PlanModal />
+                
             </div>
         </section>
     )
