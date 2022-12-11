@@ -49,7 +49,7 @@ function FormModal() {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                CONNECT WITH US
+                CONTACT US
             </Button>
 
             <Modal show={show} onHide={handleClose}>

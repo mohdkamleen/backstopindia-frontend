@@ -16,6 +16,7 @@ const banner = () => {
                 <Spinner animation="grow" variant="danger" size='sm'/>
                 <br /><br /> 
                 <FormModal />
+                &nbsp;&nbsp; <Button>SHOW MY PLANS</Button>
             </div>
         </section>
     )
