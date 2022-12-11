@@ -52,7 +52,7 @@ function FormModal() {
                 CONTACT US
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal className='text-dark' show={show} onHide={handleClose}>
                 <Modal.Body>
                     <h4>Let's connect with us</h4>
 

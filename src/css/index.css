@@ -9,6 +9,12 @@ body {
   display: block;
   margin: 0 auto;
   background-color: rgb(241, 241, 241);
+  background: url("../../public/assest/image/phone-crack.jpg");
+  color: aliceblue;
+}
+
+table {
+  color: aliceblue !important;
 }
 
 .banner {

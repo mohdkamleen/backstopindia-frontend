@@ -7,7 +7,7 @@ const Terms = () => {
     <>
       <Navbar />
       <div className='terms-section'>
-        <h4>Terms and Conditions</h4>
+        <h4 className='text-light'>Terms and Conditions</h4>
         <h6>DEFINATION</h6>
         _1-“Free Look-In Period” shall mean the number of days from the date of activation of the PACKAGES(s) within which the Customer may cancel the PACKAGES(s) and obtain a REFUND of the Total package cost. <br /><br />
         _2-“Joint Plan”: means any BACKSTOP-INDIA package that is taken for two members at the same time where the two members are related to each other by way any of the following: <br /> 

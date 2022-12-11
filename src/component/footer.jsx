@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function Footer() {
     return ( 
         <> 
-            <div className='footer-section'>
+            <div className='footer-section bg-dark' >
                  <div>
                     <h4>Our Website</h4>
                     <Link className='footer-item' to="/terms">Privacy Policy </Link> <br />
@@ -32,7 +32,7 @@ function Footer() {
                     </p>
                  </div> 
             </div>
-                 <p className='copyright'>&copy; 2022. BackstopIndia Pvt Ltd. All Rights Reserved.</p>
+                 <p className='copyright bg-dark'>&copy; 2022. BackstopIndia Pvt Ltd. All Rights Reserved.</p>
         </>
     );
 }

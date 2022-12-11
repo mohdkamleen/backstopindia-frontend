@@ -20,7 +20,7 @@ const Query = () => {
     return (
         <>
             <h4 className='text-center pb-3'>New Users table</h4>
-            <Table style={{ width: "90%", margin: "auto" }} className='text-center' responsive bordered hover size="sm">
+            <Table style={{ width: "90%", margin: "auto" }} className='text-center' responsive bordered  size="sm">
                 <thead>
                     <tr>
                         <th>#</th>

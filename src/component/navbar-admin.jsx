@@ -1,12 +1,11 @@
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
+ 
+import Container from 'react-bootstrap/Container'; 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar'; 
 
 function navbar() {
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" className='bg-dark' variant='dark'>
       <Container fluid>
         <Navbar.Brand href="/"> <font size="5" color="#0d6efd">B</font>ackstop<font size="5" color="#0d6efd">I</font>ndia</Navbar.Brand>
        

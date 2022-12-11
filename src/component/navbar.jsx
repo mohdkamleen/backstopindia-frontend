@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function navbar() {
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" bg="dark" variant="dark">
       <Container fluid>
         <Navbar.Brand href="/"> <font size="5" color="#0d6efd">B</font>ackstop<font size="5" color="#0d6efd">I</font>ndia</Navbar.Brand>
         <Navbar.Toggle />

@@ -3,14 +3,14 @@ import Card from 'react-bootstrap/Card';
 
 function ServicesCard(props) {
   return (
-    <Card className='text-center services-card' > 
+    <Card  className='text-center bg-dark services-card' > 
       <Card.Body>
         <img src={props.icon} alt="error" className="services-card-icon" />
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>
           {props.desc}
         </Card.Text>
-        <Button variant="primary">Show More</Button>
+        <Button variant="outline-primary">Show More</Button>
       </Card.Body> 
     </Card>
   );
