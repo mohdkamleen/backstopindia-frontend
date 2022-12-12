@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { AllUser } from '../redux/slice/admin'
-import Table from 'react-bootstrap/Table'; 
-import { format } from 'timeago.js';
+import Table from 'react-bootstrap/Table';  
 import moment from 'moment/moment';
 import { Link } from 'react-router-dom';
 
@@ -47,7 +46,7 @@ const VerifiedUser = () => {
                         })
                     }
                 </tbody>
-            </Table>
+            </Table><br /><br />
         </>
     )
 }

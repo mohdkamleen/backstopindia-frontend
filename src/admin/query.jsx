@@ -49,7 +49,7 @@ const Query = () => {
                         })
                     }
                 </tbody>
-            </Table>
+            </Table><br /><br />
         </>
     )
 }

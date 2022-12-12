@@ -14,13 +14,14 @@ const NewUser = () => {
         const res = await dispatch(AllUser())
         setData(res?.payload)
     }
+    
     useEffect(() => {
         getAllUser() 
     }, [])
 
     const changeVerified = async (e) => {
         const res = await dispatch(ChangeVerified(e))
-        console.log(res);
+        res?.payload?.user && window.location.reload()
     }
 
     return (
@@ -55,7 +56,7 @@ const NewUser = () => {
                         })
                     }
                 </tbody>
-            </Table>
+            </Table> <br /><br />
         </>
     )
 }

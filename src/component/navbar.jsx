@@ -25,8 +25,8 @@ function navbar() {
             <Form.Control
               type="search"
               placeholder="Search"
-              className="me-2"
-              aria-label="Search"
+              className="me-2 bg-dark text-light"
+              aria-label="Search" 
             />
             <Button variant="outline-primary">Search</Button>
           </Form>

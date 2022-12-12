@@ -39,17 +39,17 @@ function Contact() {
                 <Form className='right' style={{ width: "100%", maxWidth: "500px" }}>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control name='name' onChange={handleChange} type="text" placeholder="Enter name" />
+                        <Form.Control className='bg-transparent text-light' name='name' onChange={handleChange} type="text" placeholder="Enter name" />
                     </Form.Group> 
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address or Phone</Form.Label>
-                        <Form.Control name='contact' type="text" onChange={handleChange} placeholder="Enter email or phone" />
+                        <Form.Control className='bg-transparent text-light' name='contact' type="text" onChange={handleChange} placeholder="Enter email or phone" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Your query</Form.Label>
-                        <Form.Control name='query' as="textarea" rows={3} onChange={handleChange} placeholder="Type your problem" />
+                        <Form.Control className='bg-transparent text-light' name='query' as="textarea" rows={3} onChange={handleChange} placeholder="Type your problem" />
                     </Form.Group> 
 
                     <Button onClick={handleSubmit}>Submit</Button>

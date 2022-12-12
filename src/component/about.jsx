@@ -10,7 +10,7 @@ function Services() {
                     <details>
                         <summary>
                             ((Founded in december 2022 by Ahamad faraz and Amir khan, BACKSTOP-INDIA service provider Pvt Ltd is headquartered LUCKNOW, UTTAR PRADESH INDIA.)) <br /> <br />
-                            &nbsp; &nbsp; &nbsp; Having done extensive research on what worries the New-Age generation Indian, we realized that over the years we have started getting dependent, albeit unconsciously, on small things. So much so, that we don’t even realize how dependent we are on them, unless they cease to be a part of our daily lives. <br /><br />
+                            &nbsp; &nbsp; &nbsp; Having done extensive research on what worries the New-Age generation Indian, we realized that over the years we have started getting dependent, albeit unconsciously, on small things. So, that we don’t even realize how dependent we are on them, unless they cease to be a part of our daily lives. <br /><br />
                             <font color="blue" onClick={(e) => console.log(e.target.style.display = "none")}>Show more</font>
                         </summary>
 

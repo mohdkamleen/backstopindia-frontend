@@ -35,7 +35,7 @@ function FormModal() {
             <Button className='m-3' onClick={handleShow}>SHOW MY PLANS</Button>
 
             <Modal className='text-dark' show={show} onHide={handleClose}>
-                <Modal.Body>
+                <Modal.Body >
                     <h4>Check our plans</h4>
 
                     <Form>
