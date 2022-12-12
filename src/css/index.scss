@@ -13,6 +13,17 @@ body {
     color: aliceblue;
 }
 
+.logo{
+    height: 50px;
+    width: 100px;
+    background: red;
+    background: url("../../public/assest/image/logo.png");
+    background-position: 50% 40%;
+    background-size: 160px;
+    background-repeat: no-repeat;
+
+}
+
 table{
     color: aliceblue !important;
 }
