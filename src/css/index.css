@@ -39,6 +39,7 @@ table {
 .banner .left img {
   width: 550px;
   z-index: -1;
+  opacity: 0.5;
 }
 .banner .right {
   padding: 50px;
