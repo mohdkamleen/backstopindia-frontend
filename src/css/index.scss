@@ -42,26 +42,16 @@ table{
         justify-content: center;
         align-items: center;
 
-        img {
-            transform: rotate(-20deg);
+        img { 
             width: 550px;
-            z-index: -1;
-            margin-top: 50px;
-            animation: heartbeat 5s ease-in infinite alternate;
+            z-index: -1; 
         }
-
-        @keyframes heartbeat {
-            to {
-                transform: scale(1.01) rotate(-10deg);
-                opacity: .8;
-            }
-        }
+ 
     }
 
     .right {
         padding: 50px;
-        text-align: center;
-        flex: 1;
+        text-align: center; 
 
         h3 {
             background: rgba(0, 0, 0, 0.425);

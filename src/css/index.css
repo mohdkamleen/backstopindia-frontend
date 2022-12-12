@@ -37,29 +37,12 @@ table {
   align-items: center;
 }
 .banner .left img {
-  transform: rotate(-20deg);
   width: 550px;
   z-index: -1;
-  margin-top: 50px;
-  -webkit-animation: heartbeat 5s ease-in infinite alternate;
-          animation: heartbeat 5s ease-in infinite alternate;
-}
-@-webkit-keyframes heartbeat {
-  to {
-    transform: scale(1.01) rotate(-10deg);
-    opacity: 0.8;
-  }
-}
-@keyframes heartbeat {
-  to {
-    transform: scale(1.01) rotate(-10deg);
-    opacity: 0.8;
-  }
 }
 .banner .right {
   padding: 50px;
   text-align: center;
-  flex: 1;
 }
 .banner .right h3 {
   background: rgba(0, 0, 0, 0.425);
