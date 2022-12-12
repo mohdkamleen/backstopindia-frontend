@@ -8,7 +8,7 @@ function navbar() {
   return (
     <Navbar expand="lg" bg="dark" variant="dark">
       <Container fluid>
-        <Navbar.Brand href="/"> <font size="5" color="#0d6efd">B</font>ackstop<font size="5" color="#0d6efd">I</font>ndia</Navbar.Brand>
+        <Navbar.Brand href="/"> <img height={100} src="assest/image/remove-bg-logo.png" alt="" /> </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse id="navbarScroll">
           <Nav
