@@ -21,16 +21,16 @@ const Query = () => {
         <>
             <h4 className='text-center pb-3'>New Users table</h4>
             <Table style={{ width: "90%", margin: "auto" }} className='text-center' responsive bordered  size="sm">
-                <thead>
+                <thead variant='light' className='text-dark bg-light'>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
                         <th>Contact</th>
                         <th>Query</th>
-                        <th>Contacted At</th> 
+                        <th>ContactedAt</th> 
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='bg-dark'>
  
                     {
                         data?.map((e, i) => {

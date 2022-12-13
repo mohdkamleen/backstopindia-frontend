@@ -20,7 +20,7 @@ const VerifiedUser = () => {
         <> 
             <h4 className='text-center pb-3'>Verified users table</h4>
             <Table style={{ width: "90%", margin: "auto" }} className='text-center' responsive bordered size="sm">
-                <thead>
+                <thead className='bg-light text-dark'>
                     <tr> 
                         <th>Name</th>
                         <th>Email</th>
@@ -28,7 +28,7 @@ const VerifiedUser = () => {
                         <th>Verified At</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='bg-dark'>
                     
                     {
                         data?.map((e, i) => {

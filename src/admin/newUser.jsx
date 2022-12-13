@@ -27,7 +27,7 @@ const NewUser = () => {
     return (
         <>
             <h4 className='text-center pb-3'>New Users table</h4>
-            <Table style={{ width: "90%", margin: "auto" }} className='text-center' responsive bordered size="sm">
+            <Table style={{ width: "90%", margin: "auto" }} className='text-center' responsive bordered size="sm" variant='dark'>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -43,7 +43,7 @@ const NewUser = () => {
                         data?.map((e, i) => {
                             {
                                 return !e.verified && (
-                                    <tr key={e.id}>
+                                    <tr key={i}>
                                         <td>{e.profile.name}</td>
                                         <td>{e.profile.email}</td>
                                         <td><a href={`tel:+91${e.profile.phone}`}>{e.profile.phone}</a></td>
