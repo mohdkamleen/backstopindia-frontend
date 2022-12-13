@@ -116,6 +116,30 @@ table {
   color: rgb(212, 212, 212);
 }
 
+.admin-login-circle {
+  height: 1500px;
+  width: 1500px;
+  background: radial-gradient(rgba(0, 0, 255, 0.176), rgba(0, 0, 255, 0.639));
+  position: fixed;
+  top: 50%;
+  right: 40%;
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.admin-login-circle::after {
+  content: "";
+  height: 1500px;
+  width: 1500px;
+  background: radial-gradient(rgba(0, 0, 255, 0.199), blue);
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  border-radius: 50%;
+  z-index: -1;
+}
+
 .copyright {
   background: rgb(106, 106, 106);
   padding-bottom: 20px;

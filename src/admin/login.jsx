@@ -25,6 +25,8 @@ const Login = () => {
       <center>or</center> <br />
       <button className='btn btn-light d-block m-auto'><FaGoogle /> Login with Google</button>
 
+
+      <div className='admin-login-circle'></div>
     </>
   )
 }
