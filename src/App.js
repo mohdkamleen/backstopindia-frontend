@@ -9,6 +9,7 @@ import Admin from './admin'
 import NewUser from './admin/newUser'
 import VerifiedUser from './admin/verifiedUser'
 import Query from './admin/query'
+import AdminLogin from './admin/login'
 
 
 const App = () => {
@@ -22,8 +23,9 @@ const App = () => {
         <Route path="services" element={<Services />} />
         <Route path="terms" element={<Terms />} />
 
-        <Route path="/admin" element={<Admin />}>   
-          <Route index element={<NewUser />} />
+        <Route path='admin' element={<AdminLogin />} />
+        
+        <Route path="/admin" element={<Admin />}>
           <Route path="newUser" element={<NewUser />} />
           <Route path="verifiedUser" element={<VerifiedUser />} />
           <Route path="servicesUser" element={<NewUser />} />
