@@ -23,7 +23,7 @@ const Login = () => {
 
       </form> <br />
       <center>or</center> <br />
-      <button className='btn btn-dark d-block m-auto'><FaGoogle /> Login with Google</button>
+      <button className='btn btn-light d-block m-auto'><FaGoogle /> Login with Google</button>
 
     </>
   )
