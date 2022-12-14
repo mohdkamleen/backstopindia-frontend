@@ -1,7 +1,7 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-  
+
 const firebaseConfig = {
     apiKey: "AIzaSyAnPm4nHXXqpitq7BwORQpqZI2gZNlyxEc",
     authDomain: "backstop-india.firebaseapp.com",
@@ -15,5 +15,5 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
 var provider = new firebase.auth.GoogleAuthProvider(); 
-export {auth , provider};
+export {auth , provider, firebase};
  
