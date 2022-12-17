@@ -19,22 +19,22 @@ const Login = () => {
   const [otp, setOtp] = useState('')
 
 
- 
+
   useEffect(() => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-        "recaptcha-container",
-        {
-            size: "invisible",
-            callback: function (response) {
-                console.log("Captcha Resolved");
-                this.onSignInSubmit();
-            },
-            defaultCountry: "IN",
-        }
+      "recaptcha-container",
+      {
+        size: "invisible",
+        callback: function (response) {
+          console.log("Captcha Resolved");
+          this.onSignInSubmit();
+        },
+        defaultCountry: "IN",
+      }
     );
-}, []);
+  }, []);
 
- 
+
 
   useEffect(() => {
     window.localStorage.getItem("adminId") && (
@@ -49,7 +49,7 @@ const Login = () => {
     auth.signInWithPopup(provider).then(async (e) => {
       const res = await dispatch(LoginAdmin(e.additionalUserInfo.profile))
       window.localStorage.setItem("adminId", res.payload[0]._id)
-      navigate("newUser", { replace: true }) 
+      navigate("newUser", { replace: true })
     })
   }
 
@@ -58,7 +58,11 @@ const Login = () => {
     if (!email) return toast.warn("Please fill the blank")
     const res = await dispatch(LoginAdmin({ "email": email }))
     if (res.payload.length) {
-      loginSubmitPhone()
+      if (email.includes("@")) {
+        toast.warn("Pls login with phone.")
+      } else {
+        loginSubmitPhone()
+      }
     } else {
       setIsAdmin(false)
       toast.error("User not exist.")
@@ -75,7 +79,7 @@ const Login = () => {
     setIsAdmin(false)
   }
 
-  
+
 
   const loginSubmitPhone = () => {
     let phone_number = "+91" + email;
@@ -85,7 +89,7 @@ const Login = () => {
       .then((confirmationResult) => {
         console.log("otp sent");
         window.confirmationResult = confirmationResult;
-        setIsAdmin(true) 
+        setIsAdmin(true)
       })
       .catch((error) => {
         toast.error(error.message);
@@ -102,7 +106,7 @@ const Login = () => {
         console.log("success");
         navigate("newUser", { replace: true })
       })
-      .catch((error) => { 
+      .catch((error) => {
         toast.error(error.message);
       });
   };
@@ -110,11 +114,11 @@ const Login = () => {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
-        localStorage.setItem("adminId", user.phoneNumber)
+      localStorage.setItem("adminId", user.phoneNumber)
     } else {
-        localStorage.removeItem("adminId")
+      localStorage.removeItem("adminId")
     }
-});
+  });
 
 
 
