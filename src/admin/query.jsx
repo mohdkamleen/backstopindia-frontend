@@ -20,8 +20,8 @@ const Query = () => {
     return (
         <>
             <h4 className='text-center pb-3'>New Users table</h4>
-            <Table style={{ width: "90%", margin: "auto" }} className='text-center' responsive bordered  size="sm">
-                <thead variant='light' className='text-dark bg-light'>
+            <Table style={{ width: "90%", margin: "auto" }} className='text-center' responsive bordered variant='dark' size="sm">
+                <thead>
                     <tr>
                         <th>#</th>
                         <th>Name</th>

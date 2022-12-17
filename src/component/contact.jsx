@@ -60,7 +60,7 @@ function Contact() {
 
             {/* address details  */}
             <p style={{ margin: "20px 5%", fontSize: "20px", fontWeight: "500" }}>
-                <FaPhone /> &nbsp; <a href="tel:+919310348547">+91 9310348547</a>, <a href="tel:+916307686978">+91 6307686978</a> <br />
+                <FaPhone /> &nbsp; <a href="tel:+919310348547">+919310348547</a>, <a href="tel:+916307686978">+916307686978</a> <br />
                 <FaMailBulk /> &nbsp; contact@gmail.com <br />
                 <FaSearchLocation /> &nbsp;  Sitapur Rd, Sherwani Nagar, Diguria, Aziz Nagar, Lucknow, Uttar Pradesh 226021
             </p>
