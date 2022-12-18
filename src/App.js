@@ -1,15 +1,15 @@
 import React from 'react'
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/home'
 import Faq from './pages/faq'
 import Contact from './pages/contact'
 import Services from './pages/services'
 import Terms from './pages/terms'
 import Admin from './admin'
-import NewUser from './admin/newUser'
-import VerifiedUser from './admin/verifiedUser'
+import NewUser from './admin/newUser' 
 import Query from './admin/query'
 import AdminLogin from './admin/login'
+import User from './admin/user'
 
 
 const App = () => {
@@ -26,9 +26,7 @@ const App = () => {
         <Route path='admin' element={<AdminLogin />} />
         
         <Route path="/admin" element={<Admin />}>
-          <Route path="newUser" element={<NewUser />} />
-          <Route path="verifiedUser" element={<VerifiedUser />} />
-          <Route path="servicesUser" element={<NewUser />} />
+          <Route path="user" element={<User />} /> 
           <Route path="query" element={<Query />} />
           <Route path="claim" element={<NewUser />} />
         </Route>

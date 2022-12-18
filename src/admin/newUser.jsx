@@ -4,19 +4,21 @@ import { AllUser, ChangeVerified } from '../redux/slice/admin'
 import Table from 'react-bootstrap/Table';
 import { AiOutlineCheck } from 'react-icons/ai'
 import { format } from 'timeago.js';
-import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button'; 
+import { useLocation } from 'react-router-dom';
 
 const NewUser = () => {
     const dispatch = useDispatch()
+    const location = useLocation()
     const [data, setData] = useState([])
 
     const getAllUser = async () => {
         const res = await dispatch(AllUser())
         setData(res?.payload)
     }
-    
+
     useEffect(() => {
-        getAllUser() 
+        getAllUser()
     }, [])
 
     const changeVerified = async (e) => {
@@ -25,7 +27,7 @@ const NewUser = () => {
     }
 
     return (
-        <>
+        <> 
             <h4 className='text-center pb-3'>New Users table</h4>
             <Table style={{ width: "90%", margin: "auto" }} className='text-center' responsive bordered size="sm" variant='dark'>
                 <thead>
@@ -38,7 +40,7 @@ const NewUser = () => {
                     </tr>
                 </thead>
                 <tbody>
- 
+
                     {
                         data?.map((e, i) => {
                             {
@@ -56,7 +58,7 @@ const NewUser = () => {
                         })
                     }
                 </tbody>
-            </Table> <br /><br />
+            </Table> 
         </>
     )
 }

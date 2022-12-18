@@ -38,7 +38,7 @@ const Login = () => {
 
   useEffect(() => {
     window.localStorage.getItem("adminId") && (
-      navigate("newUser")
+      navigate("user")
     )
   }, [])
 
@@ -49,7 +49,7 @@ const Login = () => {
     auth.signInWithPopup(provider).then(async (e) => {
       const res = await dispatch(LoginAdmin(e.additionalUserInfo.profile))
       window.localStorage.setItem("adminId", res.payload[0]._id)
-      navigate("newUser", { replace: true })
+      navigate("user", { replace: true })
     })
   }
 
