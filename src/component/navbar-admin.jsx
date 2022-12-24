@@ -16,15 +16,15 @@ function NavbarFun() {
       window.localStorage.removeItem("adminId")
       navigate("/admin", { replace: true })
     })
-  }
-
-  console.log(location.pathname);
+  } 
 
 
   useEffect(() => {
-    !window.localStorage.getItem("adminId") && (
-      navigate("/admin", { replace: true })
-    )
+    const checkAuth = () => {
+      var ca = window.localStorage.getItem("adminId") 
+      ca.length < 4 && alert("asdfa")
+    }
+    checkAuth()
   }, [])
 
 

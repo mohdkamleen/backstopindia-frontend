@@ -10,10 +10,11 @@ body {
     margin: 0 auto;
     background-color: rgb(241, 241, 241);
     background: url("../../public/assest/image/phone-crack.jpg");
-    color: aliceblue;
+    color: rgb(255, 255, 255);
+    background: rgb(0, 0, 0);
 }
 
-.logo{
+.logo {
     height: 50px;
     width: 100px;
     background: red;
@@ -24,7 +25,7 @@ body {
 
 }
 
-table{
+table {
     color: aliceblue !important;
 }
 
@@ -42,17 +43,17 @@ table{
         justify-content: center;
         align-items: center;
 
-        img { 
+        img {
             width: 550px;
-            z-index: -1; 
+            z-index: -1;
             opacity: .5;
         }
- 
+
     }
 
     .right {
         padding: 50px;
-        text-align: center; 
+        text-align: center;
 
         h3 {
             background: rgba(0, 0, 0, 0.425);
@@ -101,6 +102,7 @@ table{
     justify-content: center;
     margin: 10px 5%;
     flex-wrap: wrap;
+    background: transparent;
 }
 
 
@@ -141,10 +143,10 @@ table{
     }
 }
 
-.admin-login-circle{
+.admin-login-circle {
     height: 1500px;
     width: 1500px;
-    background: radial-gradient(rgba(0, 0, 255, 0.176),rgba(0, 0, 255, 0.639));
+    background: radial-gradient(rgba(0, 0, 255, 0.176), rgba(0, 0, 255, 0.639));
     position: fixed;
     top: 50%;
     right: 40%;
@@ -153,16 +155,26 @@ table{
     opacity: .6;
 }
 
-.admin-login-circle::after{
+.admin-login-circle::after {
     content: "";
     height: 1500px;
     width: 1500px;
-    background: radial-gradient(rgba(0, 0, 255, 0.199),blue);
+    background: radial-gradient(rgba(0, 0, 255, 0.199), blue);
     position: absolute;
     top: -50%;
     right: -10%;
     border-radius: 50%;
-    z-index: -1;   
+    z-index: -1;
+}
+
+.service-slide {
+    width: 300px;
+    height: 250px;
+}
+
+
+.carousel-control-next,.carousel-control-prev {
+    background: transparent !important;
 }
 
 
@@ -217,6 +229,8 @@ table{
 
 @media (max-width:750px) {
 
+
+
     .services-card,
     .testimonial-card {
         width: 80% !important;
@@ -232,6 +246,7 @@ table{
 
 
 @media (max-width:900px) {
+
 
     .banner {
         .left {
@@ -252,5 +267,59 @@ table{
             // width: 100%; 
             display: none;
         }
+    }
+}
+
+@media (min-width:400px) {
+
+    .service-slide {
+        width: 300px;
+        height: 250px;
+    }
+}
+
+
+@media (min-width:500px) {
+
+    .service-slide {
+        width: 450px;
+        height: 200px;
+    }
+}
+
+
+
+@media (min-width:700px) {
+
+    .service-slide {
+        width: 650px;
+        height: 200px;
+    }
+}
+
+@media (min-width:900px) {
+
+    .service-slide {
+        width: 850px;
+        height: 200px;
+    }
+}
+
+
+@media (min-width:1100px) {
+
+    .service-slide {
+        width: 1050px;
+        height: 200px;
+    }
+}
+
+
+
+@media (min-width:1300px) {
+
+    .service-slide {
+        width: 1250px;
+        height: 200px;
     }
 }

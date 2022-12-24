@@ -30,7 +30,7 @@ const Query = () => {
                         <th>ContactedAt</th> 
                     </tr>
                 </thead>
-                <tbody className='bg-dark'>
+                <tbody>
  
                     {
                         data?.map((e, i) => {

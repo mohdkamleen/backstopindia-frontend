@@ -10,7 +10,8 @@ body {
   margin: 0 auto;
   background-color: rgb(241, 241, 241);
   background: url("../../public/assest/image/phone-crack.jpg");
-  color: aliceblue;
+  color: rgb(255, 255, 255);
+  background: rgb(0, 0, 0);
 }
 
 .logo {
@@ -84,6 +85,7 @@ table {
   justify-content: center;
   margin: 10px 5%;
   flex-wrap: wrap;
+  background: transparent;
 }
 
 .services-card {
@@ -138,6 +140,15 @@ table {
   right: -10%;
   border-radius: 50%;
   z-index: -1;
+}
+
+.service-slide {
+  width: 300px;
+  height: 250px;
+}
+
+.carousel-control-next, .carousel-control-prev {
+  background: transparent !important;
 }
 
 .copyright {
@@ -204,5 +215,41 @@ table {
   }
   .about-section img {
     display: none;
+  }
+}
+@media (min-width: 400px) {
+  .service-slide {
+    width: 300px;
+    height: 250px;
+  }
+}
+@media (min-width: 500px) {
+  .service-slide {
+    width: 450px;
+    height: 200px;
+  }
+}
+@media (min-width: 700px) {
+  .service-slide {
+    width: 650px;
+    height: 200px;
+  }
+}
+@media (min-width: 900px) {
+  .service-slide {
+    width: 850px;
+    height: 200px;
+  }
+}
+@media (min-width: 1100px) {
+  .service-slide {
+    width: 1050px;
+    height: 200px;
+  }
+}
+@media (min-width: 1300px) {
+  .service-slide {
+    width: 1250px;
+    height: 200px;
   }
 }/*# sourceMappingURL=index.css.map */

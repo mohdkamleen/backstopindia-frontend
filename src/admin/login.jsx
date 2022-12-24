@@ -9,8 +9,6 @@ import { LoginAdmin } from '../redux/slice/admin'
 
 
 const Login = () => {
-
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const otpValue = useRef()
@@ -37,9 +35,7 @@ const Login = () => {
 
 
   useEffect(() => {
-    window.localStorage.getItem("adminId") && (
-      navigate("user")
-    )
+    window.localStorage.getItem("adminId") && navigate("user") 
   }, [])
 
 
@@ -104,7 +100,7 @@ const Login = () => {
       .then((confirmationResult) => {
         console.log(confirmationResult);
         console.log("success");
-        navigate("newUser", { replace: true })
+        navigate("user", { replace: true })
       })
       .catch((error) => {
         toast.error(error.message);

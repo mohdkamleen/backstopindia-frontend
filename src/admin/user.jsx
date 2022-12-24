@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import { ButtonGroup } from 'react-bootstrap';
 import VerifiedUser from './verifiedUser';
-import NewUser from './newUser';
-import Login from './login';
+import NewUser from './newUser'; 
 
 const User = () => {
     const [user, setUser] = useState("newUser")
