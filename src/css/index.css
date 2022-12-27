@@ -8,10 +8,9 @@ body {
   max-width: 1600px;
   display: block;
   margin: 0 auto;
-  background-color: rgb(241, 241, 241);
   background: url("../../public/assest/image/phone-crack.jpg");
   color: rgb(255, 255, 255);
-  background: rgb(36, 36, 36);
+  background: rgb(33, 37, 41);
 }
 
 .logo {
@@ -147,7 +146,8 @@ table {
   height: 250px;
 }
 
-.carousel-control-next, .carousel-control-prev {
+.carousel-control-next,
+.carousel-control-prev {
   background: transparent !important;
 }
 

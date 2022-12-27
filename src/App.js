@@ -5,12 +5,12 @@ import Faq from './pages/faq'
 import Contact from './pages/contact'
 import Services from './pages/services'
 import Terms from './pages/terms'
+import Plans from './pages/plans'
 import Admin from './admin'
 import NewUser from './admin/newUser' 
 import Query from './admin/query'
 import AdminLogin from './admin/login'
-import User from './admin/user'
-
+import User from './admin/user' 
 
 const App = () => {
 
@@ -21,6 +21,7 @@ const App = () => {
         <Route path="faq" element={<Faq />} />
         <Route path="contact" element={<Contact />} />
         <Route path="services" element={<Services />} />
+        <Route path="plans" element={<Plans />} />
         <Route path="terms" element={<Terms />} />
 
         <Route path='admin' element={<AdminLogin />} />
