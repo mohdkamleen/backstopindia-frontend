@@ -3,32 +3,37 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
-import { registeUser } from '../redux/slice/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPlans } from '../redux/slice/plans';
+import { useNavigate } from 'react-router-dom';
 
 function FormModal() {
-    const defaultValue = {
-        name: "",
-        email: "",
-        phone: ""
-    }
-
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const plans = useSelector(state => state.plans)
     const [show, setShow] = useState(false);
-    const [agreed, setAgreed] = useState(false);
-    const [formValue, setFormValue] = useState(defaultValue);
+    const [formValue, setFormValue] = useState(plans);
+
 
     useEffect(() => {
-        return () => setFormValue(defaultValue);
+        return () => setFormValue(plans);
     }, []);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         setFormValue({ ...formValue, [e.target.name]: e.target.value })
     }
-    const handleAgreed = () => {
-        setAgreed(!agreed)
+    const handleOsChange = (e) => {
+        dispatch(addPlans({ ...formValue, os: e.target.value }))
+        setFormValue({ ...formValue, [e.target.name]: e.target.value })
+    }
+
+    const handlePlans = async () => {
+        if (!formValue.os) return toast.warn("Pls select your phone type")
+        if (!formValue.range) return toast.warn("Pls select your phone range")
+        const res = await dispatch(addPlans(formValue))
+        res && navigate("/plans")
     }
     return (
         <>
@@ -42,39 +47,51 @@ function FormModal() {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Phone type</Form.Label> <br />
-                            <Form.Select aria-label="Default select example">
+                            <Form.Select name='os' value={formValue.os} onChange={handleOsChange} aria-label="Default select example">
                                 <option selected hidden>Select phone type</option>
-                                <option value="1">Android</option>
-                                <option value="2">iPhone</option>
-                                <option value="3">Windows</option>
+                                <option value="Android">Android</option>
+                                <option value="iPhone">iPhone</option>
                             </Form.Select>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Phone range</Form.Label> <br />
-                            <Form.Select aria-label="Default select example">
+                            <Form.Select value={formValue.range} onChange={handleChange} name='range' aria-label="Default select example">
                                 <option selected hidden>Select phone range</option>
-                                <option value="1">&gt; 20,000</option>
-                                <option value="2">&gt; 30,000</option>
-                                <option value="3">&gt; 40,000</option>
+                                {
+                                    plans.os === "iPhone" && (
+                                        <>
+                                            <option value="50kto100k"> 50,000 to 1,00,000</option>
+                                            <option value="100k"> Above 1,00,000</option>
+                                        </>
+                                    )
+                                }
+                                {
+                                    plans.os === "Android" && (
+                                        <>
+                                            <option value="20k"> Upto 19,999</option> 
+                                            <option value="20kto40k"> 20,000 to 39,999 </option>
+                                        </>
+                                    )
+                                }
                             </Form.Select>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Phone</Form.Label>
-                            <Form.Control name='phone' onChange={handleChange} type="tel" placeholder="Enter phone" />
+                            <Form.Label>Imei number (optional) </Form.Label>
+                            <Form.Control name='imei' onChange={handleChange} value={formValue.imei} type="tel" placeholder="Enter phone" />
                         </Form.Group>
 
                         <Button variant="secondary" size="sm" onClick={handleClose} >
                             Cancel
                         </Button> &nbsp;&nbsp;
-                        <Button variant="primary" size="sm" >
+                        <Button variant="primary" size="sm" onClick={handlePlans}>
                             Show plans
                         </Button> <br /><br />
 
                     </Form>
 
-                </Modal.Body> 
+                </Modal.Body>
             </Modal>
         </>
     );

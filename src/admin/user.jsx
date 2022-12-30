@@ -11,10 +11,11 @@ const User = () => {
 
     return (
         <>
-            <ButtonGroup aria-label="Basic example" className='mx-5'>
+            <ButtonGroup aria-label="Basic example" className='mx-5 d-flex flex-wrap'>
                 <Button active={user === "newUser"} variant="outline-primary" onClick={() => setUser("newUser")}>New User's</Button>
                 <Button active={user === "verifiedUser"} variant="outline-primary" onClick={() => setUser("verifiedUser")}>Verified User's</Button>
                 <Button active={user === "servicesUser"} variant="outline-primary" onClick={() => setUser("servicesUser")}>Services User's</Button>
+                <Button active={user === "closedUser"} variant="outline-primary" onClick={() => setUser("closedUser")}>Closed User's</Button>
             </ButtonGroup> <br /><br />
 
             {user === "newUser" && <NewUser />}

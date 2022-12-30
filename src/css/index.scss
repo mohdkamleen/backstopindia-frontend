@@ -7,8 +7,7 @@
 body {
     max-width: 1600px;
     display: block;
-    margin: 0 auto;
-    background: url("../../public/assest/image/phone-crack.jpg");
+    margin: 0 auto; 
     color: rgb(255, 255, 255);
     background: rgb(33, 37, 41);
 }
@@ -94,6 +93,9 @@ table {
     }
 }
 
+.plans-section .active-table{
+    color: rgb(0, 192, 22) !important; 
+} 
 
 .services-card-container {
     display: flex;
