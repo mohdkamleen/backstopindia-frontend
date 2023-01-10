@@ -16,9 +16,9 @@ body {
   height: 50px;
   width: 100px;
   background: red;
-  background: url("../../public/assest/image/logo.png");
-  background-position: 50% 40%;
-  background-size: 160px;
+  background: url("../../public/assest/image/logo.jpg");
+  background-position: 50% 45%;
+  background-size: 120px;
   background-repeat: no-repeat;
 }
 
@@ -75,10 +75,6 @@ table {
 }
 .about-section .right {
   font-size: 20px;
-}
-
-.plans-section .active-table {
-  color: rgb(0, 192, 22) !important;
 }
 
 .services-card-container {

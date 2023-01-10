@@ -9,16 +9,16 @@ body {
     display: block;
     margin: 0 auto; 
     color: rgb(255, 255, 255);
-    background: rgb(33, 37, 41);
+    background: rgb(33, 37, 41); 
 }
 
 .logo {
     height: 50px;
     width: 100px;
     background: red;
-    background: url("../../public/assest/image/logo.png");
-    background-position: 50% 40%;
-    background-size: 160px;
+    background: url("../../public/assest/image/logo.jpg");
+    background-position: 50% 45%;
+    background-size: 120px;
     background-repeat: no-repeat;
 
 }

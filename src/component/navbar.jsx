@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function navbar() {
   return (
-    <Navbar expand="lg" bg="dark" variant="dark">
+    <Navbar expand="md" style={{background:"black"}}  variant="dark">
       <Container fluid>
         <Navbar.Brand href="/" className='logo'> </Navbar.Brand>
         <Navbar.Toggle />

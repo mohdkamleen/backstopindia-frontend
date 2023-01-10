@@ -18,7 +18,7 @@ const banner = () => {
                 
             </div>
             <div className="left">
-                <img src="assest/image/undraw_alert.svg" alt="" />
+                <img src="assest/image/banner.png" alt="" />
             </div>
         </section>
     )
