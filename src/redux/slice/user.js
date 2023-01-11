@@ -5,7 +5,7 @@ import axios from '../../apis/axios'
 const initialState = {
   loading : false, 
   profile: { 
-    full_name: "",
+    name: "",
     phone: "",
     email: ""
   }
@@ -23,6 +23,7 @@ const userSlice = createSlice({
       .addCase(registeUser.fulfilled, (state, action) => {
         console.log("success");
         state.loading = false
+        state.profile = action.payload.profile 
       })
       .addCase(registeUser.rejected, (state, action) => {
         console.log("error");
@@ -35,7 +36,7 @@ export const registeUser = createAsyncThunk(
   "user/register",
   async (data) => {
     try {
-      const res = await axios.post('/register', data)
+      const res = await axios.post('/register', data) 
       res.data?.message && toast.success(res.data?.message);
       return res.data
     } catch (error) {
