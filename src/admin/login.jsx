@@ -15,7 +15,9 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [isAdmin, setIsAdmin] = useState(false)
   const [otp, setOtp] = useState('')
+  const [token, setToken] = useState('')
 
+  console.log(token);
 
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const Login = () => {
 
 
   useEffect(() => {
-    window.localStorage.getItem("adminId") && navigate("user") 
+    window.localStorage.getItem("token") && navigate("user") 
   }, [])
 
 
@@ -43,9 +45,9 @@ const Login = () => {
   // Sign in with google
   const signin = () => {
     auth.signInWithPopup(provider).then(async (e) => {
-      const res = await dispatch(LoginAdmin(e.additionalUserInfo.profile))
-      window.localStorage.setItem("adminId", res.payload[0]._id)
-      navigate("user", { replace: true })
+      const res = await dispatch(LoginAdmin(e.user.multiFactor.user))
+      window.localStorage.setItem("token", res.payload[0]._id) 
+      res.payload[0]._id && navigate("user", { replace: true })
     })
   }
 
@@ -54,6 +56,7 @@ const Login = () => {
     if (!email) return toast.warn("Please fill the blank")
     const res = await dispatch(LoginAdmin({ "email": email }))
     if (res.payload.length) {
+      setToken(res.payload[0]._id)
       if (email.includes("@")) {
         toast.warn("Pls login with phone.")
       } else {
@@ -108,11 +111,11 @@ const Login = () => {
   };
 
 
-  auth.onAuthStateChanged((user) => {
+  auth.onAuthStateChanged((user) => { 
     if (user) {
-      localStorage.setItem("adminId", user.phoneNumber)
+      localStorage.setItem("token", token)
     } else {
-      localStorage.removeItem("adminId")
+      localStorage.removeItem("token")
     }
   });
 

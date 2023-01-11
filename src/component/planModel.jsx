@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPlans } from '../redux/slice/plans';
+import { addPhone } from '../redux/slice/plans';
 import { useNavigate } from 'react-router-dom';
 
 function FormModal() {
@@ -25,14 +25,14 @@ function FormModal() {
         setFormValue({ ...formValue, [e.target.name]: e.target.value })
     }
     const handleOsChange = (e) => {
-        dispatch(addPlans({ ...formValue, os: e.target.value }))
+        dispatch(addPhone({ ...formValue, os: e.target.value }))
         setFormValue({ ...formValue, [e.target.name]: e.target.value })
     }
 
     const handlePlans = async () => {
         if (!formValue.os) return toast.warn("Pls select your phone type")
         if (!formValue.range) return toast.warn("Pls select your phone range")
-        const res = await dispatch(addPlans(formValue))
+        const res = await dispatch(addPhone(formValue))
         res && navigate("/plans")
     }
     return (

@@ -13,17 +13,17 @@ function NavbarFun() {
   const location = useLocation()
   const logout = () => {
     auth.signOut().then((e) => {
-      window.localStorage.removeItem("adminId")
+      window.localStorage.removeItem("token")
       navigate("/admin", { replace: true })
     })
   } 
 
+  const checkAuth = () => {
+    var ca = window.localStorage.getItem("token") 
+    ca == "null" && logout()
+  }
 
   useEffect(() => {
-    const checkAuth = () => {
-      var ca = window.localStorage.getItem("adminId") 
-      ca.length < 4 && alert("asdfa")
-    }
     checkAuth()
   }, [])
 

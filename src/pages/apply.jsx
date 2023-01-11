@@ -47,6 +47,7 @@ const Terms = () => {
       <Navbar />
 
       <div className='mx-5'>
+        <br />
         <Form>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
