@@ -16,15 +16,11 @@ function NavbarFun() {
       window.localStorage.removeItem("token")
       navigate("/admin", { replace: true })
     })
-  } 
+  }  
 
-  const checkAuth = () => {
-    var ca = window.localStorage.getItem("token") 
-    ca == "null" && logout()
-  }
-
+  
   useEffect(() => {
-    checkAuth()
+    !window.localStorage.getItem("token") && navigate("/admin", {replace : true})
   }, [])
 
 

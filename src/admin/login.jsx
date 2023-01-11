@@ -16,9 +16,7 @@ const Login = () => {
   const [isAdmin, setIsAdmin] = useState(false)
   const [otp, setOtp] = useState('')
   const [token, setToken] = useState('')
-
-  console.log(token);
-
+ 
 
   useEffect(() => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -46,8 +44,9 @@ const Login = () => {
   const signin = () => {
     auth.signInWithPopup(provider).then(async (e) => {
       const res = await dispatch(LoginAdmin(e.user.multiFactor.user))
-      window.localStorage.setItem("token", res.payload[0]._id) 
-      res.payload[0]._id && navigate("user", { replace: true })
+      !res.payload.length && toast.warn("User not exit.")
+      res.payload.length && window.localStorage.setItem("token", res.payload[0]._id) 
+      res.payload.length > 0 && navigate("user", { replace: true })
     })
   }
 
@@ -100,9 +99,7 @@ const Login = () => {
     let opt_number = otp;
     window.confirmationResult
       .confirm(opt_number)
-      .then((confirmationResult) => {
-        console.log(confirmationResult);
-        console.log("success");
+      .then((confirmationResult) => { 
         navigate("user", { replace: true })
       })
       .catch((error) => {
