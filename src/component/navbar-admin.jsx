@@ -11,18 +11,18 @@ function NavbarFun() {
 
   const navigate = useNavigate()
   const location = useLocation()
+  
+  
+  useEffect(() => {
+    !window.localStorage.getItem("token") && navigate("/admin", {replace : true})
+  }, [])
+  
   const logout = () => {
     auth.signOut().then((e) => {
       window.localStorage.removeItem("token")
       navigate("/admin", { replace: true })
     })
   }  
-
-  
-  useEffect(() => {
-    !window.localStorage.getItem("token") && navigate("/admin", {replace : true})
-  }, [])
-
 
   return (
     <Navbar expand="lg" className='bg-dark' variant='dark'>

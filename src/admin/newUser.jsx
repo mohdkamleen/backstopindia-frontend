@@ -49,7 +49,7 @@ const NewUser = () => {
                                         <td>{e.profile.name}</td>
                                         <td>{e.profile.email}</td>
                                         <td><a href={`tel:+91${e.profile.phone}`}>{e.profile.phone}</a></td>
-                                        <td>{format(e.createdAt)}</td>
+                                        <td>{format(e.updatedAt)}</td>
                                         <td><Button onClick={() => changeVerified(e)} variant="outline-success" className='btn-sm' style={{ width: "100px" }}><AiOutlineCheck size={15} /></Button></td>
                                     </tr>
                                 )

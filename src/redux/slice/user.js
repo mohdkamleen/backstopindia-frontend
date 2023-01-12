@@ -14,7 +14,11 @@ const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: { },
+  reducers: { 
+    updateUser(state,action){
+      state.profile = action.payload
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registeUser.pending, (state, action) => {
@@ -45,5 +49,5 @@ export const registeUser = createAsyncThunk(
   }
 )
 
-export const { registerUser } = userSlice.actions
+export const { registerUser, updateUser } = userSlice.actions
 export default userSlice.reducer

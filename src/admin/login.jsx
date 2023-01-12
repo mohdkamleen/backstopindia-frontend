@@ -35,7 +35,8 @@ const Login = () => {
 
 
   useEffect(() => {
-    window.localStorage.getItem("token") && navigate("user") 
+    window.localStorage.getItem("token") && navigate("user"
+    ,{replace:true}) 
   }, [])
 
 

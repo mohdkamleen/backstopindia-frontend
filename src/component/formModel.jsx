@@ -7,12 +7,16 @@ import { useDispatch } from 'react-redux';
 import { registeUser } from '../redux/slice/user';
 
 function FormModal() {
- 
+
     const defaultValue = {
-        name: "",
-        email: "",
-        phone: ""
+        name :"",
+        email :"",
+        phone:""
     }
+  
+    useEffect(() => {
+       JSON.parse(window.localStorage.getItem("userContact")) && setFormValue(JSON.parse(window.localStorage.getItem("userContact")))
+    },[])
 
     const dispatch = useDispatch()
     const [show, setShow] = useState(false);
@@ -36,8 +40,7 @@ function FormModal() {
         if (!agreed) return toast.warn("Please read our condition")
         const res = await dispatch(registeUser(formValue))
         if (res) {
-            window.localStorage.setItem("userContact", JSON.stringify(formValue))
-            toast.success("Success")
+            window.localStorage.setItem("userContact", JSON.stringify(formValue)) 
             setShow(false)
             setAgreed(false)
         }
@@ -57,13 +60,13 @@ function FormModal() {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control onChange={handleChange} name='name' type="text" placeholder="Enter name" />
+                            <Form.Control onChange={handleChange} value={formValue.name} name='name' type="text" placeholder="Enter name" />
                         </Form.Group>
 
 
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control name="email" onChange={handleChange} type="email" placeholder="Enter email" />
+                            <Form.Control name="email" onChange={handleChange} value={formValue.email} type="email" placeholder="Enter email" />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -71,7 +74,7 @@ function FormModal() {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Phone</Form.Label>
-                            <Form.Control name='phone' onChange={handleChange} type="tel" placeholder="Enter phone" />
+                            <Form.Control name='phone' onChange={handleChange} type="tel" value={formValue.phone} placeholder="Enter phone" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
