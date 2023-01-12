@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { registeUser } from '../redux/slice/user';
 
 function FormModal() {
+ 
     const defaultValue = {
         name: "",
         email: "",
@@ -18,9 +19,6 @@ function FormModal() {
     const [agreed, setAgreed] = useState(false);
     const [formValue, setFormValue] = useState(defaultValue);
 
-    useEffect(() => {
-        return () => setFormValue(defaultValue);
-    }, []);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -38,11 +36,10 @@ function FormModal() {
         if (!agreed) return toast.warn("Please read our condition")
         const res = await dispatch(registeUser(formValue))
         if (res) {
-            console.log(res);
+            window.localStorage.setItem("userContact", JSON.stringify(formValue))
             toast.success("Success")
             setShow(false)
             setAgreed(false)
-            setFormValue(defaultValue)
         }
     }
 
