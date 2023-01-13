@@ -29,7 +29,7 @@ const Terms = () => {
         <div className='d-flex justify-content-center flex-wrap gap-3 '>
           {
            plans.os && plans.range && plansData[plans.os][plans.range].map((e,i) => (
-              <Card className='text-dark' >
+              <Card className='text-dark' key={i}>
                 <Card.Header> <b>₹ {e.price}/-&nbsp;</b> {e.duration * 28} days  ({e.duration}month)</Card.Header>
                 <Card.Body>
                   <Card.Title>{e.title}</Card.Title>

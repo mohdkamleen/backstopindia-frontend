@@ -57,7 +57,7 @@ function FormModal() {
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Phone range</Form.Label> <br />
                             <Form.Select value={formValue.range} onChange={handleChange} name='range' aria-label="Default select example">
-                                <option selected hidden>Select phone range</option>
+                                <option hidden>Select phone range</option>
                                 {
                                     plans.os === "iPhone" && (
                                         <>

@@ -25,10 +25,10 @@ const Apply = () => {
   const [model, setModel] = useState("default");
 
   useEffect(() => {
-    setFormValue(JSON.parse(window.localStorage.getItem("userContact")));
+    JSON.parse(window.localStorage.getItem("userContact")) && setFormValue({ ...formValue, ...JSON.parse(window.localStorage.getItem("userContact")) });
   }, []);
-   
-  
+
+
   useEffect(() => {
     !plans.os && !plans.range && navigate("/plans", { replace: true })
   }, [])
@@ -39,7 +39,7 @@ const Apply = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!formValue.name && !formValue.email && !formValue.phone && !formValue.imei) {
+    if (!formValue.name || !formValue.email || !formValue.phone || !formValue.imei) {
       return toast.warn("All feilds are required")
     }
     const res = await dispatch(updateUser(formValue))
@@ -101,21 +101,35 @@ const Apply = () => {
         {
           model === "image" && (
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Upload Your Bill receipt</Form.Label> <br />
+              <Form.Label>Upload Your Bill Receipt</Form.Label> <br />
 
               <label htmlFor="plan-bill-image">
-                <AiFillPlusCircle style={{border:"1px solid lightgray",padding:"30px",marginLeft:"10px"}} size={100} color="lightblue"/>
+                <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px"}} size={100} color="lightblue" />
               </label>
 
-              <input style={{display:"none"}} id='plan-bill-image' type="file" onChange={async (e) => {
-                // setImageLoading(true)
-                const dataa = new FormData();
-                dataa.append("file", e.target.files[0]); 
-                var resp = await axios.post("/upload/image", dataa);
-                console.log(resp.data.path);
-                // setFormValue({ ...formValue, image: res.data.path })
-                // setImageLoading(false)
-              }} />  
+              <input style={{ display: "none" }} id='plan-bill-image' type="file"
+                onChange={async (e) => {
+                  var data = new FormData()
+                  data.append("file", e.target.files[0])
+                  console.log(data);
+                  var res = await axios.post("/upload/image", data)
+                  // console.log(res) 
+                  }} /> 
+                
+                <br /><br />
+
+              {/* <Form.Label>Upload Your Phone Image</Form.Label> <br />
+
+              <label htmlFor="plan-bill-image">
+                <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px",margin:"0px 10px 10px 0px"}} size={100} color="lightblue" />
+              </label>
+              <label htmlFor="plan-bill-image">
+                <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px",margin:"0px 10px 10px 0px"}} size={100} color="lightblue" />
+              </label>
+              <label htmlFor="plan-bill-image">
+                <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px",margin:"0px 10px 10px 0px"}} size={100} color="lightblue" />
+              </label> */}
+ 
 
             </Form.Group>
           )
