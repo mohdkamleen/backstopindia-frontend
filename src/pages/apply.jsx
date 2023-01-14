@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../component/navbar'
 import Footer from '../component/footer'
-import { Button, Card, Form, Table } from 'react-bootstrap'
+import { Breadcrumb, Button, Card, Form, Table } from 'react-bootstrap'
 import { AiFillPlusCircle } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { updateUser } from '../redux/slice/user'
 import axios from '../apis/axios'
 import useRazorpay from "react-razorpay";
@@ -22,6 +22,7 @@ const Apply = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const [formValue, setFormValue] = useState(defaultValue);
   const [model, setModel] = useState("default");
   const [imageLoading, setImageLoading] = useState(false)
@@ -46,7 +47,7 @@ const Apply = () => {
     }
     const res = await dispatch(updateUser(formValue))
     if (res) {
-      setModel("image")
+      setModel("upload")
     }
   }
 
@@ -132,8 +133,15 @@ const handlePayment = async (amount) => {
     <>
       <Navbar />
 
-      <div className='mx-5' >
-        <br />
+      <div className='mx-5' > <br />
+         
+    <Breadcrumb>
+      <Breadcrumb.Item href="/">Home</Breadcrumb.Item> 
+      <Breadcrumb.Item onClick={() => navigate("/plans")} active={location.path === "plans"}>Plans</Breadcrumb.Item> 
+      <Breadcrumb.Item active={model === "default"} onClick={() => setModel("default")}>Apply</Breadcrumb.Item>
+      {(model === "upload" || model.length != 6) && <Breadcrumb.Item active={model === "upload"} onClick={() => setModel("upload")}>Upload</Breadcrumb.Item> }
+      {model === "payment" && <Breadcrumb.Item active={model === "payment"}>Payment</Breadcrumb.Item> }
+    </Breadcrumb> 
 
         {
           model === 'default' && (
@@ -179,7 +187,7 @@ const handlePayment = async (amount) => {
         }
 
         {
-          model === "image" && (
+          model === "upload" && (
             <Form method='post' encType='multipart/form-data'>
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Upload Your Bill Receipt</Form.Label> <br />
@@ -198,7 +206,7 @@ const handlePayment = async (amount) => {
                 <input style={{ display: "none" }} id='plan-bill-image' type="file"
                   onChange={handleUploadBill} /> <br />
 
-                <br /><br />
+                <br /> 
 
                 <Form.Label>Upload Your Phone Image</Form.Label> <br />
 
