@@ -1,17 +1,18 @@
 import React from 'react'
-import Navbar from '../component/navbar' 
+import Navbar from '../component/navbar'
 import Services from '../component/services'
-import Banner from '../component/banner' 
-import About from '../component/about' 
-import Contact from '../component/contact' 
+import Banner from '../component/banner'
+import About from '../component/about'
+import Contact from '../component/contact'
 import Testimonials from '../component/testimonials'
 import Footer from '../component/footer'
 
-const home = () => {
+const Home = () => { 
+
   return (
-    <> 
-      <Navbar /> 
-      <Banner /> 
+    <>
+      <Navbar />  
+      <Banner />
       <Services /> <br />
       <Contact /> <br />
       <About />  <br />
@@ -21,4 +22,4 @@ const home = () => {
   )
 }
 
-export default home
+export default Home

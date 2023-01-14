@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { updateUser } from '../redux/slice/user'
 import axios from '../apis/axios'
+import useRazorpay from "react-razorpay";
 
 const Apply = () => {
   const plans = useSelector(state => state.plans)
@@ -23,6 +24,7 @@ const Apply = () => {
   const navigate = useNavigate()
   const [formValue, setFormValue] = useState(defaultValue);
   const [model, setModel] = useState("default");
+  const [imageLoading, setImageLoading] = useState(false)
 
   useEffect(() => {
     JSON.parse(window.localStorage.getItem("userContact")) && setFormValue({ ...formValue, ...JSON.parse(window.localStorage.getItem("userContact")) });
@@ -47,6 +49,84 @@ const Apply = () => {
       setModel("image")
     }
   }
+
+  const handleUploadBill = async (e) => {
+    setImageLoading(true);
+    var data = new FormData();
+    data.append("file", e?.target?.files[0])
+    console.log(e.target.files[0]);
+    var res = await axios.post("/upload/image", data);
+    console.log(res?.data?.path);
+    setImageLoading(false);
+  }
+
+  
+// const paymentFun = (e) => {
+//   var options = {
+//       "key": "rzp_test_zr0e0xCtwZpA90",
+//       "amount": e * 100,
+//       "currency": "INR",
+//       "name": "Mohd Kamleen",
+//       "description": "Premium Project purches at Kamleen Tech",
+//       "image": "https://mohd-kamleen.web.app/image/kamleen.png",
+//       "handler": function success() {
+//           console.log("success");
+//       },
+//       "theme": {
+//           "color": "#bff39f"
+//       }
+//   };
+//   var rzp1 = new Razorpay(options);
+//   rzp1.open();
+// }
+
+
+const Razorpay = useRazorpay();
+
+const handlePayment = async (amount) => {
+  // const order = await createOrder(params); //  Create order on your backend
+
+  const options = {
+    key: "rzp_test_zr0e0xCtwZpA90", // Enter the Key ID generated from the Dashboard
+    amount: amount * "100", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    currency: "INR",
+    name: "Backstop India ",
+    description: "Test Transaction",
+    image: "https://www.backstopindia.com/assest/image/logo-sm-removebg.png",
+    // order_id: "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
+    handler: function (response) {
+      console.log(response.razorpay_payment_id);
+      console.log(response.razorpay_order_id);
+      console.log(response.razorpay_signature);
+    },
+    prefill: {
+      name: formValue.name,
+      email: formValue.email,
+      contact: formValue.phone,
+    },
+    notes: {
+      address: "Razorpay Corporate Office",
+    },
+    theme: {
+      color: "#3399cc",
+    },
+  };
+
+  const rzp1 = new Razorpay(options);
+
+  rzp1.on("payment.failed", function (response) {
+    console.log(response.error.code);
+    console.log(response.error.description);
+    console.log(response.error.source);
+    console.log(response.error.step);
+    console.log(response.error.reason);
+    console.log(response.error.metadata.order_id);
+    console.log(response.error.metadata.payment_id);
+  });
+
+  rzp1.open();
+};
+
 
   return (
     <>
@@ -100,38 +180,67 @@ const Apply = () => {
 
         {
           model === "image" && (
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Upload Your Bill Receipt</Form.Label> <br />
+            <Form method='post' encType='multipart/form-data'>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Upload Your Bill Receipt</Form.Label> <br />
 
-              <label htmlFor="plan-bill-image">
-                <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px"}} size={100} color="lightblue" />
-              </label>
+                {
+                  !imageLoading
+                    ? (
+                      <label htmlFor="plan-bill-image" disabled>
+                        <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px" }} size={100} color="lightblue" />
+                      </label>
+                    )
+                    : <img src='./assest/image/loading.gif' width="50" />
 
-              <input style={{ display: "none" }} id='plan-bill-image' type="file"
-                onChange={async (e) => {
-                  var data = new FormData()
-                  data.append("file", e.target.files[0])
-                  console.log(data);
-                  var res = await axios.post("/upload/image", data)
-                  // console.log(res) 
-                  }} /> 
-                
+                }
+
+                <input style={{ display: "none" }} id='plan-bill-image' type="file"
+                  onChange={handleUploadBill} /> <br />
+
                 <br /><br />
 
-              {/* <Form.Label>Upload Your Phone Image</Form.Label> <br />
+                <Form.Label>Upload Your Phone Image</Form.Label> <br />
 
-              <label htmlFor="plan-bill-image">
-                <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px",margin:"0px 10px 10px 0px"}} size={100} color="lightblue" />
-              </label>
-              <label htmlFor="plan-bill-image">
-                <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px",margin:"0px 10px 10px 0px"}} size={100} color="lightblue" />
-              </label>
-              <label htmlFor="plan-bill-image">
-                <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px",margin:"0px 10px 10px 0px"}} size={100} color="lightblue" />
-              </label> */}
- 
+                <label htmlFor="plan-bill-image">
+                  <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px", margin: "0px 10px 10px 0px" }} size={100} color="lightblue" />
+                </label>
+                <label htmlFor="plan-bill-image">
+                  <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px", margin: "0px 10px 10px 0px" }} size={100} color="lightblue" />
+                </label>
+                <label htmlFor="plan-bill-image">
+                  <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px", margin: "0px 10px 10px 0px" }} size={100} color="lightblue" />
+                </label>
 
-            </Form.Group>
+              </Form.Group>
+
+              <Button onClick={() => setModel("payment")}>Continue and next</Button>
+
+            </Form>
+          )
+        }
+
+        {
+          model === "payment" && (
+            <>
+              <Form style={{ maxWidth: "500px" }} className='m-auto d-block'>
+                <Card className='text-dark' >
+                  <Card.Header> <b>₹ {plans.plan.price}/-&nbsp;</b> {plans.plan.duration * 28} days  ({plans.duration}month)</Card.Header>
+                  <Card.Body>
+                    <Card.Title>{plans.plan.title}</Card.Title>
+                    <Card.Text>{plans.plan.desc}</Card.Text>
+                    &nbsp; <small>Name&nbsp; : </small> <b>{formValue.name}</b> <br />
+                    &nbsp; <small>Email &nbsp; : </small> <b>{formValue.email}</b><br />
+                    &nbsp; <small>Phone&ensp;: </small> <b>{formValue.phone}</b><br />
+                    &nbsp; <small>IMEI &ensp;&ensp;:</small> <b>{formValue.imei}</b> <br />
+                    &nbsp; <small>Bill R. &ensp;: </small> <b style={{color:"green"}}>File Upload Success</b> <br />
+                    &nbsp; <small>Phone&nbsp;: </small> <b style={{color:"green"}}>3 Image Upload Success</b> <br /><br />
+
+                    <Button onClick={() => handlePayment(plans.plan.price)}>Continue and Pay</Button>
+                  </Card.Body>
+                </Card>
+              </Form>
+            </>
           )
         }
 
