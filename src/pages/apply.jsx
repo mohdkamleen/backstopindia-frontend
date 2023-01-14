@@ -138,10 +138,10 @@ const handlePayment = async (amount) => {
          
     <Breadcrumb>
       <Breadcrumb.Item href="/">Home</Breadcrumb.Item> 
-      <Breadcrumb.Item onClick={() => navigate("/plans")} active={location.path === "plans" || model === "success"}>Plans</Breadcrumb.Item> 
-      <Breadcrumb.Item active={model === "default" || model === "success"} onClick={() => setModel("default")}>Apply</Breadcrumb.Item>
-      {(model === "upload" || model.length != 6) && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => setModel("upload")}>Upload</Breadcrumb.Item> }
-      {model === "payment" && <Breadcrumb.Item active={model === "payment" || model === "success"}>Payment</Breadcrumb.Item> }
+      <Breadcrumb.Item onClick={() => {model != "success" && navigate("/plans")}} active={location.path === "plans" || model === "success"}>Plans</Breadcrumb.Item> 
+      <Breadcrumb.Item active={model === "default" || model === "success"} onClick={() => {model != "success" && setModel("default")}}>Apply</Breadcrumb.Item>
+      {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => {model != "success" && setModel("upload")}}>Upload</Breadcrumb.Item> }
+      {(model === "payment" || model === "success") && <Breadcrumb.Item active={model === "payment" || model === "success"}>Payment</Breadcrumb.Item> }
     </Breadcrumb> 
 
         {
