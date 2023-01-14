@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { updateUser } from '../redux/slice/user'
-import axios from '../apis/axios'
+import axios from 'axios'
 import useRazorpay from "react-razorpay";
+import { addBill } from '../redux/slice/plans'
 
 const Apply = () => {
   const plans = useSelector(state => state.plans)
@@ -23,6 +24,7 @@ const Apply = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
+  const Razorpay = useRazorpay();
   const [formValue, setFormValue] = useState(defaultValue);
   const [model, setModel] = useState("default");
   const [imageLoading, setImageLoading] = useState(false)
@@ -51,83 +53,51 @@ const Apply = () => {
     }
   }
 
-  const handleUploadBill = async (e) => {
-    setImageLoading(true);
-    var data = new FormData();
-    data.append("file", e?.target?.files[0])
-    console.log(e.target.files[0]);
-    var res = await axios.post("/upload/image", data);
-    console.log(res?.data?.path);
-    setImageLoading(false);
-  }
 
-  
-// const paymentFun = (e) => {
-//   var options = {
-//       "key": "rzp_test_zr0e0xCtwZpA90",
-//       "amount": e * 100,
-//       "currency": "INR",
-//       "name": "Mohd Kamleen",
-//       "description": "Premium Project purches at Kamleen Tech",
-//       "image": "https://mohd-kamleen.web.app/image/kamleen.png",
-//       "handler": function success() {
-//           console.log("success");
-//       },
-//       "theme": {
-//           "color": "#bff39f"
-//       }
-//   };
-//   var rzp1 = new Razorpay(options);
-//   rzp1.open();
-// }
+  const handlePayment = async (amount) => {
+    // const order = await createOrder(params); //  Create order on your backend
 
+    const options = {
+      key: "rzp_test_zr0e0xCtwZpA90", // Enter the Key ID generated from the Dashboard
+      amount: amount * "100", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: "INR",
+      name: "Backstop India ",
+      description: "Test Transaction",
+      image: "https://www.backstopindia.com/assest/image/logo-sm-removebg.png",
+      // order_id: "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
+      handler: function (response) {
+        setModel("success")
+        console.log(response.razorpay_payment_id);
+        console.log(response.razorpay_order_id);
+        console.log(response.razorpay_signature);
+      },
+      prefill: {
+        name: formValue.name,
+        email: formValue.email,
+        contact: formValue.phone,
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
 
-const Razorpay = useRazorpay();
+    const rzp1 = new Razorpay(options);
 
-const handlePayment = async (amount) => {
-  // const order = await createOrder(params); //  Create order on your backend
+    rzp1.on("payment.failed", function (response) {
+      console.log(response.error.code);
+      console.log(response.error.description);
+      console.log(response.error.source);
+      console.log(response.error.step);
+      console.log(response.error.reason);
+      console.log(response.error.metadata.order_id);
+      console.log(response.error.metadata.payment_id);
+    });
 
-  const options = {
-    key: "rzp_test_zr0e0xCtwZpA90", // Enter the Key ID generated from the Dashboard
-    amount: amount * "100", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    currency: "INR",
-    name: "Backstop India ",
-    description: "Test Transaction",
-    image: "https://www.backstopindia.com/assest/image/logo-sm-removebg.png",
-    // order_id: "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
-    handler: function (response) {
-      setModel("success")
-      console.log(response.razorpay_payment_id);
-      console.log(response.razorpay_order_id);
-      console.log(response.razorpay_signature);
-    },
-    prefill: {
-      name: formValue.name,
-      email: formValue.email,
-      contact: formValue.phone,
-    },
-    notes: {
-      address: "Razorpay Corporate Office",
-    },
-    theme: {
-      color: "#3399cc",
-    },
+    rzp1.open();
   };
-
-  const rzp1 = new Razorpay(options);
-
-  rzp1.on("payment.failed", function (response) {
-    console.log(response.error.code);
-    console.log(response.error.description);
-    console.log(response.error.source);
-    console.log(response.error.step);
-    console.log(response.error.reason);
-    console.log(response.error.metadata.order_id);
-    console.log(response.error.metadata.payment_id);
-  });
-
-  rzp1.open();
-};
 
 
   return (
@@ -135,14 +105,14 @@ const handlePayment = async (amount) => {
       <Navbar />
 
       <div className='mx-5' > <br />
-         
-    <Breadcrumb>
-      <Breadcrumb.Item href="/">Home</Breadcrumb.Item> 
-      <Breadcrumb.Item onClick={() => {model != "success" && navigate("/plans")}} active={location.path === "plans" || model === "success"}>Plans</Breadcrumb.Item> 
-      <Breadcrumb.Item active={model === "default" || model === "success"} onClick={() => {model != "success" && setModel("default")}}>Apply</Breadcrumb.Item>
-      {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => {model != "success" && setModel("upload")}}>Upload</Breadcrumb.Item> }
-      {(model === "payment" || model === "success") && <Breadcrumb.Item active={model === "payment" || model === "success"}>Payment</Breadcrumb.Item> }
-    </Breadcrumb> 
+
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+          <Breadcrumb.Item onClick={() => { model != "success" && navigate("/plans") }} active={location.path === "plans" || model === "success"}>Plans</Breadcrumb.Item>
+          <Breadcrumb.Item active={model === "default" || model === "success"} onClick={() => { model != "success" && setModel("default") }}>Apply</Breadcrumb.Item>
+          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { model != "success" && setModel("upload") }}>Upload</Breadcrumb.Item>}
+          {(model === "payment" || model === "success") && <Breadcrumb.Item active={model === "payment" || model === "success"}>Payment</Breadcrumb.Item>}
+        </Breadcrumb>
 
         {
           model === 'default' && (
@@ -193,21 +163,33 @@ const handlePayment = async (amount) => {
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Upload Your Bill Receipt</Form.Label> <br />
 
-                {
-                  !imageLoading
-                    ? (
-                      <label htmlFor="plan-bill-image" disabled>
-                        <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px" }} size={100} color="lightblue" />
-                      </label>
-                    )
-                    : <img src='./assest/image/loading.gif' width="50" />
+                {plans.bill && <img src={plans.bill} height={200} />}
 
-                }
+                {
+                  !plans.bill && (
+                    !imageLoading
+                      ? (
+                        <label htmlFor="plan-bill-image" disabled>
+                          <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px" }} size={100} color="lightblue" />
+                        </label>
+                      )
+                      : <img src='./assest/image/loading.gif' width="50" style={{padding:"20px 5px"}} />
+                      )
+                    }
+
 
                 <input style={{ display: "none" }} id='plan-bill-image' type="file"
-                  onChange={handleUploadBill} /> <br />
+                  onChange={async (e) => {
+                    setImageLoading(true);
+                    var data = new FormData();
+                    data.append("file", e.target.files[0])
+                    var res = await axios.post("http://localhost:8000/api/upload/image", data);
+                    console.log(res);
+                    res.data.path && await dispatch(addBill(res.data?.path));
+                    setImageLoading(false);
+                  }} /> <br />
 
-                <br /> 
+                <br />
 
                 <Form.Label>Upload Your Phone Image</Form.Label> <br />
 
@@ -242,8 +224,8 @@ const handlePayment = async (amount) => {
                     &nbsp; <small>Email &nbsp; : </small> <b>{formValue.email}</b><br />
                     &nbsp; <small>Phone&ensp;: </small> <b>{formValue.phone}</b><br />
                     &nbsp; <small>IMEI &ensp;&ensp;:</small> <b>{formValue.imei}</b> <br />
-                    &nbsp; <small>Bill R. &ensp;: </small> <b style={{color:"green"}}>File Upload Success</b> <br />
-                    &nbsp; <small>Phone&nbsp;: </small> <b style={{color:"green"}}>3 Image Upload Success</b> <br /><br />
+                    &nbsp; <small>Bill R. &ensp;: </small> <b style={{ color: "green" }}>File Upload Success</b> <br />
+                    &nbsp; <small>Phone&nbsp;: </small> <b style={{ color: "green" }}>3 Image Upload Success</b> <br /><br />
 
                     <Button onClick={() => handlePayment(plans.plan.price)}>Continue and Pay</Button>
                   </Card.Body>
