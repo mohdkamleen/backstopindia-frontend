@@ -96,6 +96,7 @@ const handlePayment = async (amount) => {
     image: "https://www.backstopindia.com/assest/image/logo-sm-removebg.png",
     // order_id: "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
     handler: function (response) {
+      setModel("success")
       console.log(response.razorpay_payment_id);
       console.log(response.razorpay_order_id);
       console.log(response.razorpay_signature);
@@ -137,10 +138,10 @@ const handlePayment = async (amount) => {
          
     <Breadcrumb>
       <Breadcrumb.Item href="/">Home</Breadcrumb.Item> 
-      <Breadcrumb.Item onClick={() => navigate("/plans")} active={location.path === "plans"}>Plans</Breadcrumb.Item> 
-      <Breadcrumb.Item active={model === "default"} onClick={() => setModel("default")}>Apply</Breadcrumb.Item>
-      {(model === "upload" || model.length != 6) && <Breadcrumb.Item active={model === "upload"} onClick={() => setModel("upload")}>Upload</Breadcrumb.Item> }
-      {model === "payment" && <Breadcrumb.Item active={model === "payment"}>Payment</Breadcrumb.Item> }
+      <Breadcrumb.Item onClick={() => navigate("/plans")} active={location.path === "plans" || model === "success"}>Plans</Breadcrumb.Item> 
+      <Breadcrumb.Item active={model === "default" || model === "success"} onClick={() => setModel("default")}>Apply</Breadcrumb.Item>
+      {(model === "upload" || model.length != 6) && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => setModel("upload")}>Upload</Breadcrumb.Item> }
+      {model === "payment" && <Breadcrumb.Item active={model === "payment" || model === "success"}>Payment</Breadcrumb.Item> }
     </Breadcrumb> 
 
         {
@@ -252,6 +253,11 @@ const handlePayment = async (amount) => {
           )
         }
 
+        {
+          model === "success" && (
+            <h4>Payment Success...</h4>
+          )
+        }
       </div>
 
       <Footer />
