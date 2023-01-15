@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { updateUser } from '../redux/slice/user'
 import axios from 'axios'
 import useRazorpay from "react-razorpay";
-import { addBill } from '../redux/slice/plans'
+import { addBill, addPhoneImg } from '../redux/slice/plans'
 
 const Apply = () => {
   const plans = useSelector(state => state.plans)
@@ -26,8 +26,9 @@ const Apply = () => {
   const location = useLocation()
   const Razorpay = useRazorpay();
   const [formValue, setFormValue] = useState(defaultValue);
-  const [model, setModel] = useState("default");
+  const [model, setModel] = useState("default"); 
   const [imageLoading, setImageLoading] = useState(false)
+  const [phoneImgLoading, setPhoneImgLoading] = useState(false)
 
   useEffect(() => {
     JSON.parse(window.localStorage.getItem("userContact")) && setFormValue({ ...formValue, ...JSON.parse(window.localStorage.getItem("userContact")) });
@@ -173,9 +174,9 @@ const Apply = () => {
                           <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px" }} size={100} color="lightblue" />
                         </label>
                       )
-                      : <img src='./assest/image/loading.gif' width="50" style={{padding:"20px 5px"}} />
-                      )
-                    }
+                      : <img src='./assest/image/loading.gif' width="50" style={{ padding: "20px 5px" }} />
+                  )
+                }
 
 
                 <input style={{ display: "none" }} id='plan-bill-image' type="file"
@@ -184,24 +185,43 @@ const Apply = () => {
                     var data = new FormData();
                     data.append("file", e.target.files[0])
                     var res = await axios.post("http://localhost:8000/api/upload/image", data);
-                    console.log(res);
                     res.data.path && await dispatch(addBill(res.data?.path));
                     setImageLoading(false);
                   }} /> <br />
 
                 <br />
 
-                <Form.Label>Upload Your Phone Image</Form.Label> <br />
+                <Form.Label>Upload Your Phone Image</Form.Label> 
 
-                <label htmlFor="plan-bill-image">
-                  <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px", margin: "0px 10px 10px 0px" }} size={100} color="lightblue" />
-                </label>
-                <label htmlFor="plan-bill-image">
-                  <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px", margin: "0px 10px 10px 0px" }} size={100} color="lightblue" />
-                </label>
-                <label htmlFor="plan-bill-image">
-                  <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px", margin: "0px 10px 10px 0px" }} size={100} color="lightblue" />
-                </label>
+
+
+                <input style={{ display: "none" }} id='phone-image' type="file"
+                  onChange={async (e) => {
+                    setPhoneImgLoading(true);
+                    var data = new FormData();
+                    data.append("file", e.target.files[0])
+                    var res = await axios.post("http://localhost:8000/api/upload/image", data);
+                    await dispatch(addPhoneImg(res.data?.path));
+                    setPhoneImgLoading(false);
+                  }} /> <br />
+
+                {plans.phoneImg.map((e, i) => (
+                  <img key={i} src={e} height="200" style={{ padding: "20px 5px" }} />
+                ))}
+
+                {
+                  plans.phoneImg.length < 3 && (
+                    !phoneImgLoading
+                      ? (
+                        <label htmlFor="phone-image">
+                          <AiFillPlusCircle style={{ border: "1px solid lightgray", padding: "30px", margin: "0px 10px 10px 0px" }} size={100} color="lightblue" />
+                        </label>
+                      )
+                      : <img src='./assest/image/loading.gif' width="50" style={{ padding: "20px 5px" }} />
+                  )
+                }
+
+
 
               </Form.Group>
 
@@ -224,8 +244,8 @@ const Apply = () => {
                     &nbsp; <small>Email &nbsp; : </small> <b>{formValue.email}</b><br />
                     &nbsp; <small>Phone&ensp;: </small> <b>{formValue.phone}</b><br />
                     &nbsp; <small>IMEI &ensp;&ensp;:</small> <b>{formValue.imei}</b> <br />
-                    &nbsp; <small>Bill R. &ensp;: </small> <b style={{ color: "green" }}>File Upload Success</b> <br />
-                    &nbsp; <small>Phone&nbsp;: </small> <b style={{ color: "green" }}>3 Image Upload Success</b> <br /><br />
+                    &nbsp; <small>Bill R. &ensp;: </small> <b style={{ color: "green" }}>File Uploaded </b> <br />
+                    &nbsp; <small>Phone&nbsp;: </small> <b style={{ color: "green" }}> {plans.phoneImg.length} Image Uploaded </b> <br /><br />
 
                     <Button onClick={() => handlePayment(plans.plan.price)}>Continue and Pay</Button>
                   </Card.Body>

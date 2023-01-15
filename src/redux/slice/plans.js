@@ -29,10 +29,13 @@ const plansSlice = createSlice({
     addBill(state, action) {
       state.bill = action.payload
     },
+    addPhoneImg(state, action) {
+      state.phoneImg.push(action.payload)
+    },
 
   },
   extraReducers: () => { }
 })
 
-export const { addPhone, addPlans, addBill } = plansSlice.actions
+export const { addPhone, addPlans, addBill, addPhoneImg } = plansSlice.actions
 export default plansSlice.reducer
