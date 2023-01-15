@@ -10,8 +10,10 @@ import { updateUser } from '../redux/slice/user'
 import axios from 'axios'
 import useRazorpay from "react-razorpay";
 import { addBill, addPhoneImg } from '../redux/slice/plans'
+import { patchUser, updatePayment } from '../redux/slice/admin'
 
 const Apply = () => {
+  const user = useSelector(state => state)
   const plans = useSelector(state => state.plans)
 
   const defaultValue = {
@@ -26,7 +28,8 @@ const Apply = () => {
   const location = useLocation()
   const Razorpay = useRazorpay();
   const [formValue, setFormValue] = useState(defaultValue);
-  const [model, setModel] = useState("default"); 
+  const [model, setModel] = useState("default");
+  const [customerId, setCustomerId] = useState("");
   const [imageLoading, setImageLoading] = useState(false)
   const [phoneImgLoading, setPhoneImgLoading] = useState(false)
 
@@ -66,11 +69,13 @@ const Apply = () => {
       description: "Test Transaction",
       image: "https://www.backstopindia.com/assest/image/logo-sm-removebg.png",
       // order_id: "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
-      handler: function (response) {
+      handler: async function (response) { 
+        const res = await dispatch(updatePayment({
+          paymentId: response.razorpay_payment_id,
+          _id: customerId, 
+        }))
+        console.log(res.payload);
         setModel("success")
-        console.log(response.razorpay_payment_id);
-        console.log(response.razorpay_order_id);
-        console.log(response.razorpay_signature);
       },
       prefill: {
         name: formValue.name,
@@ -84,10 +89,10 @@ const Apply = () => {
         color: "#3399cc",
       },
     };
-
+    
     const rzp1 = new Razorpay(options);
-
-    rzp1.on("payment.failed", function (response) {
+    
+    rzp1.on("payment.failed", function (response) { 
       console.log(response.error.code);
       console.log(response.error.description);
       console.log(response.error.source);
@@ -96,10 +101,19 @@ const Apply = () => {
       console.log(response.error.metadata.order_id);
       console.log(response.error.metadata.payment_id);
     });
-
+    
     rzp1.open();
   };
-
+   
+  
+  const handlePaymentAndRegister = async () => {
+    const res = await dispatch(patchUser(user))
+    console.log(res.payload);
+    if (res.payload) {
+      setCustomerId(res.payload._id)
+      setModel("payment")
+    }
+  }
 
   return (
     <>
@@ -111,7 +125,7 @@ const Apply = () => {
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item onClick={() => { model != "success" && navigate("/plans") }} active={location.path === "plans" || model === "success"}>Plans</Breadcrumb.Item>
           <Breadcrumb.Item active={model === "default" || model === "success"} onClick={() => { model != "success" && setModel("default") }}>Apply</Breadcrumb.Item>
-          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { model != "success" && setModel("upload") }}>Upload</Breadcrumb.Item>}
+          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { setModel("upload") }}>Upload</Breadcrumb.Item>}
           {(model === "payment" || model === "success") && <Breadcrumb.Item active={model === "payment" || model === "success"}>Payment</Breadcrumb.Item>}
         </Breadcrumb>
 
@@ -191,7 +205,7 @@ const Apply = () => {
 
                 <br />
 
-                <Form.Label>Upload Your Phone Image</Form.Label> 
+                <Form.Label>Upload Your Phone Image</Form.Label>
 
 
 
@@ -225,7 +239,7 @@ const Apply = () => {
 
               </Form.Group>
 
-              <Button onClick={() => setModel("payment")}>Continue and next</Button>
+              <Button onClick={handlePaymentAndRegister}>Continue and next</Button>
 
             </Form>
           )
