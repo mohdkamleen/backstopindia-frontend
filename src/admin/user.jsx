@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import { ButtonGroup } from 'react-bootstrap';
 import VerifiedUser from './verifiedUser';
-import NewUser from './newUser'; 
+import NewUser from './newUser';  
+import ServicesUser from './servicesUser'
 
 const User = () => {
-    const [user, setUser] = useState("newUser")
+    const [user, setUser] = useState("servicesUser")
 
 
 
@@ -20,7 +21,7 @@ const User = () => {
 
             {user === "newUser" && <NewUser />}
             {user === "verifiedUser" && <VerifiedUser />}
-            {user === "servicesUser" && <NewUser />}
+            {user === "servicesUser" && <ServicesUser />}
 
             <br /><br />
         </>

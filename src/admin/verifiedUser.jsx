@@ -39,9 +39,9 @@ const VerifiedUser = () => {
                             {
                                 return e.verified && (
                                     <tr key={e.id}>
-                                        <td>{e.profile.name}</td>
-                                        <td>{e.profile.email}</td>
-                                        <td><Link to={`tel:+91${e.profile.phone}`}>{e.profile.phone}</Link></td>
+                                        <td>{e.profile?.name}</td>
+                                        <td>{e.profile?.email}</td>
+                                        <td><Link to={`tel:+91${e.profile?.phone}`}>{e.profile?.phone}</Link></td>
                                         <td>{moment(e.updatedAt).format("LLLL")}</td>
                                     </tr>
                                 )

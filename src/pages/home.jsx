@@ -6,8 +6,10 @@ import About from '../component/about'
 import Contact from '../component/contact'
 import Testimonials from '../component/testimonials'
 import Footer from '../component/footer'
+import moment from 'moment'
 
-const Home = () => { 
+const Home = () => {  
+
 
   return (
     <>

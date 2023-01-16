@@ -11,6 +11,11 @@ const initialState = {
     duration: "",
     title: "",
     desc: ""
+  },
+  payment : {
+    status :"",
+    paymentId:""
+
   }
 }
 
@@ -31,7 +36,7 @@ const plansSlice = createSlice({
     },
     addPhoneImg(state, action) {
       state.phoneImg.push(action.payload)
-    },
+    },  
 
   },
   extraReducers: () => { }
