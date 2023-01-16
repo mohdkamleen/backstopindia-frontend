@@ -110,6 +110,8 @@ const Apply = () => {
  
 
   const handlePaymentAndRegister = async () => {
+    if(!plans.bill) return toast.warn("Pls insert your bill")
+    if(plans.phoneImg < 2) return toast.warn("Minimum two image required of phone")
     const res = await dispatch(patchUser(user))
     console.log(res.payload);
     if (res.payload) {
@@ -128,7 +130,7 @@ const Apply = () => {
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item onClick={() => { model != "success" && navigate("/plans") }} active={location.path === "plans" || model === "success"}>Plans</Breadcrumb.Item>
           <Breadcrumb.Item active={model === "default" || model === "success"} onClick={() => { model != "success" && setModel("default") }}>Apply</Breadcrumb.Item>
-          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { setModel("upload") }}>Upload</Breadcrumb.Item>}
+          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { model != "success" && setModel("upload") }}>Upload</Breadcrumb.Item>}
           {(model === "payment" || model === "success") && <Breadcrumb.Item active={model === "payment" || model === "success"}>Payment</Breadcrumb.Item>}
         </Breadcrumb>
 
