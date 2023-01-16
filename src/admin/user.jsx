@@ -6,7 +6,7 @@ import NewUser from './newUser';
 import ServicesUser from './servicesUser'
 
 const User = () => {
-    const [user, setUser] = useState("servicesUser")
+    const [user, setUser] = useState("newUser")
 
 
 
