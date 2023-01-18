@@ -38,7 +38,7 @@ const VerifiedUser = () => {
                         data?.map((e, i) => {
                             {
                                 return e.verified && (
-                                    <tr key={e.id}>
+                                    <tr key={i}>
                                         <td>{e.profile?.name}</td>
                                         <td>{e.profile?.email}</td>
                                         <td><Link to={`tel:+91${e.profile?.phone}`}>{e.profile?.phone}</Link></td>
