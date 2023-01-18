@@ -4,6 +4,7 @@ import { ButtonGroup } from 'react-bootstrap';
 import VerifiedUser from './verifiedUser';
 import NewUser from './newUser';  
 import ServicesUser from './servicesUser'
+import ClosedUser from './closedUser'
 
 const User = () => {
     const [user, setUser] = useState("newUser")
@@ -22,6 +23,7 @@ const User = () => {
             {user === "newUser" && <NewUser />}
             {user === "verifiedUser" && <VerifiedUser />}
             {user === "servicesUser" && <ServicesUser />}
+            {user === "closedUser" && <ClosedUser />}
 
             <br /><br />
         </>

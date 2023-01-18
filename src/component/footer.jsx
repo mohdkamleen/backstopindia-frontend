@@ -21,7 +21,7 @@ function Footer() {
                  </div><br />
                  <div>
                     <h4>Contact Us</h4>
-                    <p style={{wordBreak:"break-word"}}> +919310348547 , +916307686978  </p>
+                    <p style={{wordBreak:"break-word"}}> +919310348547 , +917007927401  </p>
                     <p>contact@backstopindia.com</p>
                     <p>Sitapur Rd, Sherwani Nagar, Diguria, Aziz Nagar, Lucknow, Uttar Pradesh 226021</p>
                     <br />  

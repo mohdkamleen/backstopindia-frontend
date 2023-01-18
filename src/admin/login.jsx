@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import { FaGoogle } from 'react-icons/fa'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { auth, provider, firebase } from '../firebase/index'
@@ -12,11 +12,13 @@ const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const otpValue = useRef()
+  const admin = useSelector(state => state.admin)
+
   const [email, setEmail] = useState('')
   const [isAdmin, setIsAdmin] = useState(false)
   const [otp, setOtp] = useState('')
   const [token, setToken] = useState('')
- 
+
 
   useEffect(() => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -35,8 +37,7 @@ const Login = () => {
 
 
   useEffect(() => {
-    window.localStorage.getItem("token") && navigate("user"
-    ,{replace:true}) 
+    window.localStorage.getItem("token") && navigate("user", { replace: true })
   }, [])
 
 
@@ -46,7 +47,7 @@ const Login = () => {
     auth.signInWithPopup(provider).then(async (e) => {
       const res = await dispatch(LoginAdmin(e.user.multiFactor.user))
       !res.payload.length && toast.warn("User not exit.")
-      res.payload.length && window.localStorage.setItem("token", res.payload[0]._id) 
+      res.payload.length && window.localStorage.setItem("token", res.payload[0]._id)
       res.payload.length > 0 && navigate("user", { replace: true })
     })
   }
@@ -100,7 +101,9 @@ const Login = () => {
     let opt_number = otp;
     window.confirmationResult
       .confirm(opt_number)
-      .then((confirmationResult) => { 
+      .then((confirmationResult) => {
+        console.log(confirmationResult);
+        localStorage.setItem("token", token)
         navigate("user", { replace: true })
       })
       .catch((error) => {
@@ -109,13 +112,13 @@ const Login = () => {
   };
 
 
-  auth.onAuthStateChanged((user) => { 
-    if (user) {
-      localStorage.setItem("token", token)
-    } else {
-      localStorage.removeItem("token")
-    }
-  });
+  // auth.onAuthStateChanged((user) => {
+  //   if (user) {
+  //     localStorage.setItem("token", token)
+  //   } else {
+  //     localStorage.removeItem("token")
+  //   }
+  // });
 
 
 
@@ -149,7 +152,7 @@ const Login = () => {
         {
           isAdmin
             ? <button className='btn btn-light' onClick={handleLogin}>Verify and Login</button>
-            : <button className='btn btn-light' onClick={handleOtp}>Send Otp</button>
+            : <button className='btn btn-light' onClick={handleOtp}>Send Otp {admin.loading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />} </button>
         }
 
       </form> <br />
