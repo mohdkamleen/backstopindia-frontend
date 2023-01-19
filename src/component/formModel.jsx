@@ -35,8 +35,11 @@ function FormModal() {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (formValue.name === "" || formValue.email === "" || formValue.phone === "") {
+        if (formValue.name === "" || formValue.email === "" || formValue.phone === "" ) {
             return toast.warn("All feilds are required")
+        }
+        if (formValue.phone.length != 10 || String(formValue.phone)[0] == 0 || String(formValue.phone)[0] == 1 || String(formValue.phone)[0] == 2 || String(formValue.phone)[0] == 3 || String(formValue.phone)[0] == 4 || String(formValue.phone)[0] == 5 ) {
+            return toast.warn("Please type valid phone no.")
         }
         if (!agreed) return toast.warn("Please read our condition")
         const res = await dispatch(registeUser(formValue))
