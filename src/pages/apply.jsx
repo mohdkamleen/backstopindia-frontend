@@ -9,14 +9,18 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { updateUser } from '../redux/slice/user'
 import axios from 'axios'
 import useRazorpay from "react-razorpay";
-import { addBill, addPhoneImg } from '../redux/slice/plans'
+import { addBill, addPhone, addPhoneImg, updateImei } from '../redux/slice/plans'
 import { patchUser, updatePayment } from '../redux/slice/admin'
-import coustomer, { addAll } from '../redux/slice/coustomer'
+import { addAll } from '../redux/slice/coustomer'
+import moment from 'moment/moment'
+import { jsPDF } from "jspdf";
+import { useRef } from 'react'
 
 const Apply = () => {
   const user = useSelector(state => state)
   const plans = useSelector(state => state.plans)
-  const coustomer = useSelector(state => state.coustomer.coustomer)
+  const { coustomer } = useSelector(state => state.coustomer)
+
 
   const defaultValue = {
     name: "",
@@ -33,7 +37,8 @@ const Apply = () => {
   const [model, setModel] = useState("default");
   const [customerId, setCustomerId] = useState("");
   const [imageLoading, setImageLoading] = useState(false)
-  const [phoneImgLoading, setPhoneImgLoading] = useState(false) 
+  const [pdfLoading, setPdfLoading] = useState(false)
+  const [phoneImgLoading, setPhoneImgLoading] = useState(false)
 
   useEffect(() => {
     JSON.parse(window.localStorage.getItem("userContact")) && setFormValue({ ...formValue, ...JSON.parse(window.localStorage.getItem("userContact")) });
@@ -44,9 +49,27 @@ const Apply = () => {
     !plans.os && !plans.range && navigate("/plans", { replace: true })
   }, [])
 
+  const pdfRef = useRef(null)
+
+  const handlePdf = () => {
+    setPdfLoading(true)
+    const pdf = new jsPDF({
+      format: 'a4',
+      unit: 'px',
+    });
+    pdf.html(pdfRef.current, {
+      async callback(doc) { 
+        setPdfLoading(false)
+        await doc.save(coustomer.profile?.name.toLowerCase().split(" ")[0]+"-bsi");
+      },
+    });
+  }
+
+
   const handleChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value })
   }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -54,6 +77,7 @@ const Apply = () => {
       return toast.warn("All feilds are required")
     }
     const res = await dispatch(updateUser(formValue))
+    await dispatch(updateImei(formValue.imei))
     if (res) {
       setModel("upload")
     }
@@ -76,7 +100,7 @@ const Apply = () => {
           paymentId: response.razorpay_payment_id,
           _id: customerId,
         }))
-        console.log(res.payload); 
+        console.log(res.payload);
         setModel("success")
         await dispatch(addAll(res.payload))
       },
@@ -107,16 +131,18 @@ const Apply = () => {
 
     rzp1.open();
   };
- 
+
 
   const handlePaymentAndRegister = async () => {
-    if(!plans.bill) return toast.warn("Pls insert your bill")
-    if(plans.phoneImg.length < 2) return toast.warn("Minimum two image required of phone")
+    if (!plans.bill) return toast.warn("Pls insert your bill")
+    if (plans.phoneImg.length < 2) return toast.warn("Minimum two image required of phone")
     const res = await dispatch(patchUser(user))
     console.log(res.payload);
-    if (res.payload) {
+    if (res.payload._id) {
       setCustomerId(res.payload._id)
       setModel("payment")
+    } else {
+      toast.warn("Something went wrong pls check")
     }
   }
 
@@ -244,7 +270,7 @@ const Apply = () => {
 
               </Form.Group>
 
-              <Button onClick={handlePaymentAndRegister}>Continue and next  { user.admin.loading && <img src="./assest/image/loading.gif" width={20} style={{marginBottom:"5px"}}/> } </Button>
+              <Button onClick={handlePaymentAndRegister}>Continue and next  {user.admin.loading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />} </Button>
 
             </Form>
           )
@@ -273,27 +299,31 @@ const Apply = () => {
             </>
           )
         }
-        
+
         {
           model === "success" && (
             <div style={{ maxWidth: "600px" }} className='m-auto d-block'>
-              
-              <h2>Congrates {coustomer.profile.name} </h2>
-              <Card className='text-dark' >
-                  <Card.Header> <b>₹ {coustomer.plans.plan.price}/-&nbsp;</b> {coustomer.plans.plan.duration * 28} days  ({coustomer.plans.duration}month)</Card.Header>
-                  <Card.Body>
-                    <Card.Title>{coustomer.plans.plan.title}</Card.Title>
-                    <Card.Text>{coustomer.plans.plan.desc}</Card.Text>
-                    &nbsp; <small>Name&nbsp; : </small> <b>{coustomer.profile.name}</b> <br />
-                    &nbsp; <small>Email &nbsp; : </small> <b>{coustomer.profile.email}</b><br />
-                    &nbsp; <small>Phone&ensp;: </small> <b>{coustomer.profile.phone}</b><br />
-                    &nbsp; <small>IMEI &ensp;&ensp;:</small> <b>{coustomer.plans.imei}</b> <br />
-                    &nbsp; <small>Bill R. &ensp;: </small> <b style={{ color: "green" }}>File Uploaded </b> <br />
-                    &nbsp; <small>Phone&nbsp;: </small> <b style={{ color: "green" }}> {coustomer.plans.phoneImg.length} Image Uploaded </b> <br /><br />
 
-                    <Button onClick={() => {}}>Download Reciept</Button>
-                  </Card.Body>
-                </Card>
+              <h2>Congrates {coustomer?.profile?.name} </h2>
+              <Card ref={pdfRef} className='text-dark' >
+                <Card.Header> <b>₹ {coustomer.plans?.plan.price}/-&nbsp;</b> {coustomer.plans?.plan.duration * 28} days  ({coustomer.plans?.duration}month)</Card.Header>
+                <Card.Body>
+                  <Card.Title>{coustomer.plans?.plan.title}</Card.Title>
+                  <Card.Text>{coustomer.plans?.plan.desc}</Card.Text>
+                  &nbsp; <small>Name&nbsp; : </small> <b>{coustomer.profile?.name}</b> <br />
+                  &nbsp; <small>Email &nbsp; : </small> <b> {coustomer.profile?.email}</b><br />
+                  &nbsp; <small>Phone&ensp;: </small> <b> {coustomer.profile?.phone}</b><br />
+                  &nbsp; <small>IMEI &ensp;&ensp;:</small> <b>{coustomer.plans?.imei}</b> <br />
+                  &nbsp; <small>Joined : </small> <b>{moment(coustomer.createdAt).format("ll")}</b> <br />
+                  &nbsp; <small>Expire&ensp;: </small> <b>{moment(Number(coustomer.expire.date)).format("ll")}</b> <br />
+                  &nbsp; <small>Bill R. &ensp;: </small> <b style={{ color: "green" }}>File Uploaded </b> <br />
+                  &nbsp; <small>Phone&nbsp;: </small> <b style={{ color: "green" }}> {coustomer.plans?.phoneImg.length} Image Uploaded </b> <br /><br />
+
+                  <Button onClick={handlePdf}>Download Reciept {pdfLoading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />} </Button>
+                </Card.Body>
+              </Card>
+
+
             </div>
           )
         }

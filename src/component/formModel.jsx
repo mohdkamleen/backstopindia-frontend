@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registeUser } from '../redux/slice/user';
 
 function FormModal() {
@@ -19,6 +19,7 @@ function FormModal() {
     },[])
 
     const dispatch = useDispatch()
+    const { loading } = useSelector(state => state.user)
     const [show, setShow] = useState(false);
     const [agreed, setAgreed] = useState(false);
     const [formValue, setFormValue] = useState(defaultValue);
@@ -88,7 +89,7 @@ function FormModal() {
                         Cancel
                     </Button>
                     <Button onClick={handleSubmit} variant="primary" size="sm" >
-                        Submit and get call from us
+                        Submit and get call from us  { loading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />} 
                     </Button>
                 </Modal.Footer>
             </Modal>

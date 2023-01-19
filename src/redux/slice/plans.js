@@ -28,6 +28,9 @@ const plansSlice = createSlice({
       state.range = action.payload.range
       state.imei = action.payload.imei
     },
+    updateImei(state, action) { 
+      state.imei = action.payload
+    },
     addPlans(state, action) {
       state.plan = action.payload
     },
@@ -42,5 +45,5 @@ const plansSlice = createSlice({
   extraReducers: () => { }
 })
 
-export const { addPhone, addPlans, addBill, addPhoneImg } = plansSlice.actions
+export const { addPhone, addPlans, addBill, addPhoneImg, updateImei } = plansSlice.actions
 export default plansSlice.reducer
