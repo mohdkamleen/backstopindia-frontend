@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../component/navbar'
 import Footer from '../component/footer'
-import { Breadcrumb, Button, Card, Form, Table } from 'react-bootstrap'
-import { AiFillMail, AiFillPhone, AiFillPlusCircle, AiOutlineGlobal, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
+import { Breadcrumb, Button, Card, Form } from 'react-bootstrap'
+import { AiFillPlusCircle, AiOutlineGlobal, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
 import { CiLocationOn } from 'react-icons/ci'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -10,7 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { updateUser } from '../redux/slice/user'
 import axios from 'axios'
 import useRazorpay from "react-razorpay";
-import { addBill, addPhone, addPhoneImg, updateImei } from '../redux/slice/plans'
+import { addBill, addPhoneImg, updateImei } from '../redux/slice/plans'
 import { patchUser, updatePayment } from '../redux/slice/admin'
 import { addAll } from '../redux/slice/coustomer'
 import moment from 'moment/moment'
@@ -67,29 +67,34 @@ const Apply = () => {
   }
 
   const PdfHtml = () => (
-    <div style={{ width: "100% !important", border: "2px solid gray", padding: "5px", overflow: "auto", maxWidth: "700px", margin: "auto" }}>
-      <div ref={pdfRef} className=' bg-light text-dark px-5 ' style={{ minWidth: "600px", width: "100%" }}>
-        <small style={{marginLeft:"-40px"}}>{coustomer?._id}</small>
-        <h3 className='text-center pt-3 pb-5'><u>Warrenty Latter</u></h3>
+    <div style={{ width: "100% !important", fontSize: "14px", border: "2px solid gray", padding: "5px", overflow: "auto", maxWidth: "620px", margin: "auto" }}>
+      <div ref={pdfRef} className=' bg-light text-dark px-5 pb-5' style={{ minWidth: "600px", width: "100%" }}>
+        <small style={{ marginLeft: "-40px" }}>{coustomer?._id}</small>
+        <h4 className='text-center pt-3 pb-5'><u>Warrenty Latter</u></h4>
         <div className='d-flex justify-content-between'>
           <h6>Joined : {moment(coustomer.createdAt).format("ll")}</h6>
           <h6>Expire : {moment(Number(coustomer.expire.date)).format("ll")}</h6>
-        </div> 
+        </div>
         <h5>Congrats, {coustomer?.profile?.name}</h5>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi officia, modi aut aliquam laudantium voluptatibus obcaecati facilis reprehenderit cumque vel nihil ad quae a quam quo debitis soluta tempora dolorem ea quos commodi! Assumenda omnis, est quia, perspiciatis fugiat reprehenderit molestias, debitis corrupti quo ad harum temporibus doloremque cumque adipisci!</p>
+        <small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi officia, modi aut aliquam laudantium voluptatibus obcaecati facilis reprehenderit cumque vel nihil ad quae a quam quo debitis soluta tempora dolorem ea quos commodi! Assumenda omnis, est quia, perspiciatis fugiat reprehenderit molestias, debitis <b>corrupti</b> quo ad harum temporibus doloremque cumque adipisci!</small> <br /><br />
         <p><b>As servised user of BACKSTOPINDIA you are subjected to the following conditions:- </b></p>
+        <ol>
+          <li>Lorem ipsum dolor sit amet.</li>
+          <li>Lorem ipsum dolor sit amet.</li>
+          <li>Lorem ipsum dolor sit amet.</li>
+        </ol>
         <p><b>Note :</b> Return a signed copy of this letter as your acceptance.</p><br />
         <div className='d-flex justify-content-between'>
           <div></div>
           <div style={{ maxWidth: "320px" }}>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="./assest/image/verified-stamp.png" alt="" width={170} />   <br />
-            <b> <AiOutlineGlobal size={25} color="darkgreen" /> www.backstopindia.com </b> <br />
-            <b> <AiOutlineMail size={25} color="darkgreen" /> support@backstopindia.com </b> <br />
-            <b> <AiOutlinePhone size={25} color="darkgreen" /> +919310348547 </b> <br />
-            <b> <CiLocationOn size={25} color="darkgreen" /> Sherwani Nagar, Lucknow UP 226021 </b> <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img src="./assest/image/verified-stamp.png" alt="" width={150} /><br />
+            <AiOutlineGlobal size={20} color="darkgreen" /> www.backstopindia.com <br />
+            <AiOutlineMail size={20} color="darkgreen" /> support@backstopindia.com <br />
+            <AiOutlinePhone size={20} color="darkgreen" /> +919310348547 <br />
+            <CiLocationOn size={20} color="darkgreen" /> Sherwani Nagar, Lucknow UP 226021 <br />
           </div>
-        </div> <br /><br />
+        </div>
       </div>
     </div>
   )
@@ -353,6 +358,7 @@ const Apply = () => {
             //   </Card>  
             // </div>
             <>
+              <p>We have sended this pdf file in your email but you can take screenshot or download this pdf for claim in future.</p>
               <PdfHtml /> <br />
               <Button onClick={handlePdf} className="d-block m-auto">Download Reciept {pdfLoading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />} </Button>
             </>
