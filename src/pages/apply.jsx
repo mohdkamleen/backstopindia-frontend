@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../component/navbar'
 import Footer from '../component/footer'
 import { Breadcrumb, Button, Card, Form, Table } from 'react-bootstrap'
-import { AiFillPlusCircle } from 'react-icons/ai'
+import { AiFillMail, AiFillPhone, AiFillPlusCircle, AiOutlineGlobal, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
+import { CiLocationOn } from 'react-icons/ci'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -55,15 +56,44 @@ const Apply = () => {
     setPdfLoading(true)
     const pdf = new jsPDF({
       format: 'a4',
-      unit: 'px',
+      unit: 'pt',
     });
     pdf.html(pdfRef.current, {
-      async callback(doc) { 
+      async callback(doc) {
         setPdfLoading(false)
-        await doc.save(coustomer.profile?.name.toLowerCase().split(" ")[0]+"-bsi");
+        await doc.save(coustomer.profile?.name.toLowerCase().split(" ")[0] + "-bsi");
       },
     });
   }
+
+  const PdfHtml = () => (
+    <div style={{ width: "100% !important", border: "2px solid gray", padding: "5px", overflow: "auto", maxWidth: "700px", margin: "auto" }}>
+      <div ref={pdfRef} className=' bg-light text-dark px-5 ' style={{ minWidth: "600px", width: "100%" }}>
+        <small style={{marginLeft:"-40px"}}>{coustomer?._id}</small>
+        <h3 className='text-center pt-3 pb-5'><u>Warrenty Latter</u></h3>
+        <div className='d-flex justify-content-between'>
+          <h6>Joined : {moment(coustomer.createdAt).format("ll")}</h6>
+          <h6>Expire : {moment(Number(coustomer.expire.date)).format("ll")}</h6>
+        </div> 
+        <h5>Congrats, {coustomer?.profile?.name}</h5>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi officia, modi aut aliquam laudantium voluptatibus obcaecati facilis reprehenderit cumque vel nihil ad quae a quam quo debitis soluta tempora dolorem ea quos commodi! Assumenda omnis, est quia, perspiciatis fugiat reprehenderit molestias, debitis corrupti quo ad harum temporibus doloremque cumque adipisci!</p>
+        <p><b>As servised user of BACKSTOPINDIA you are subjected to the following conditions:- </b></p>
+        <p><b>Note :</b> Return a signed copy of this letter as your acceptance.</p><br />
+        <div className='d-flex justify-content-between'>
+          <div></div>
+          <div style={{ maxWidth: "320px" }}>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img src="./assest/image/verified-stamp.png" alt="" width={170} />   <br />
+            <b> <AiOutlineGlobal size={25} color="darkgreen" /> www.backstopindia.com </b> <br />
+            <b> <AiOutlineMail size={25} color="darkgreen" /> support@backstopindia.com </b> <br />
+            <b> <AiOutlinePhone size={25} color="darkgreen" /> +919310348547 </b> <br />
+            <b> <CiLocationOn size={25} color="darkgreen" /> Sherwani Nagar, Lucknow UP 226021 </b> <br />
+          </div>
+        </div> <br /><br />
+      </div>
+    </div>
+  )
+
 
 
   const handleChange = (e) => {
@@ -302,36 +332,43 @@ const Apply = () => {
 
         {
           model === "success" && (
-            <div style={{ maxWidth: "600px" }} className='m-auto d-block'>
+            // <div style={{ maxWidth: "600px" }} className='m-auto d-block'>
 
-              <h2>Congrates {coustomer?.profile?.name} </h2>
-              <Card ref={pdfRef} className='text-dark' >
-                <Card.Header> <b>₹ {coustomer.plans?.plan.price}/-&nbsp;</b> {coustomer.plans?.plan.duration * 28} days  ({coustomer.plans?.duration}month)</Card.Header>
-                <Card.Body>
-                  <Card.Title>{coustomer.plans?.plan.title}</Card.Title>
-                  <Card.Text>{coustomer.plans?.plan.desc}</Card.Text>
-                  &nbsp; <small>Name&nbsp; : </small> <b>{coustomer.profile?.name}</b> <br />
-                  &nbsp; <small>Email &nbsp; : </small> <b> {coustomer.profile?.email}</b><br />
-                  &nbsp; <small>Phone&ensp;: </small> <b> {coustomer.profile?.phone}</b><br />
-                  &nbsp; <small>IMEI &ensp;&ensp;:</small> <b>{coustomer.plans?.imei}</b> <br />
-                  &nbsp; <small>Joined : </small> <b>{moment(coustomer.createdAt).format("ll")}</b> <br />
-                  &nbsp; <small>Expire&ensp;: </small> <b>{moment(Number(coustomer.expire.date)).format("ll")}</b> <br />
-                  &nbsp; <small>Bill R. &ensp;: </small> <b style={{ color: "green" }}>File Uploaded </b> <br />
-                  &nbsp; <small>Phone&nbsp;: </small> <b style={{ color: "green" }}> {coustomer.plans?.phoneImg.length} Image Uploaded </b> <br /><br />
+            //   <h2>Congrates {coustomer?.profile?.name} </h2>
+            //   <Card className='text-dark' >
+            //     <Card.Header> <b>₹ {coustomer.plans?.plan.price}/-&nbsp;</b> {coustomer.plans?.plan.duration * 28} days  ({coustomer.plans?.duration}month)</Card.Header>
+            //     <Card.Body>
+            //       <Card.Title>{coustomer.plans?.plan.title}</Card.Title>
+            //       <Card.Text>{coustomer.plans?.plan.desc}</Card.Text>
+            //       &nbsp; <small>Name&nbsp; : </small> <b>{coustomer.profile?.name}</b> <br />
+            //       &nbsp; <small>Email &nbsp; : </small> <b> {coustomer.profile?.email}</b><br />
+            //       &nbsp; <small>Phone&ensp;: </small> <b> {coustomer.profile?.phone}</b><br />
+            //       &nbsp; <small>IMEI &ensp;&ensp;:</small> <b>{coustomer.plans?.imei}</b> <br />
+            //       &nbsp; <small>Joined : </small> <b>{moment(coustomer.createdAt).format("ll")}</b> <br />
+            //       &nbsp; <small>Expire&ensp;: </small> <b>{moment(Number(coustomer.expire.date)).format("ll")}</b> <br />
+            //       &nbsp; <small>Bill R. &ensp;: </small> <b style={{ color: "green" }}>File Uploaded </b> <br />
+            //       &nbsp; <small>Phone&nbsp;: </small> <b style={{ color: "green" }}> {coustomer.plans?.phoneImg.length} Image Uploaded </b> <br /><br />
 
-                  <Button onClick={handlePdf}>Download Reciept {pdfLoading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />} </Button>
-                </Card.Body>
-              </Card>
-
-
-            </div>
+            //     </Card.Body>
+            //   </Card>  
+            // </div>
+            <>
+              <PdfHtml /> <br />
+              <Button onClick={handlePdf} className="d-block m-auto">Download Reciept {pdfLoading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />} </Button>
+            </>
           )
         }
       </div>
 
+
       <Footer />
     </>
   )
+
+
 }
 
 export default Apply
+
+
+
