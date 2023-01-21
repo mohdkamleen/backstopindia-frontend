@@ -39,7 +39,7 @@ const NewUser = () => {
             {
                 coustomer && (<Modal className='text-dark' show={show} onHide={handleClose}> 
                         <Card className='text-dark' >
-                            <Card.Header> <b>₹ {coustomer.plans.plan.price}/-&nbsp;</b> {coustomer.plans.plan.duration * 28} days  ({coustomer.plans.duration}month)</Card.Header>
+                            <Card.Header> <b>₹ {coustomer.plans.plan.price}/-&nbsp;</b> {coustomer.plans.plan.duration * 28} days  ({coustomer.plans.plan.duration}month)</Card.Header>
                             <Card.Body>
                                 <Card.Title>{coustomer.plans.plan.title}</Card.Title>
                                 <Card.Text>{coustomer.plans.plan.desc}</Card.Text>

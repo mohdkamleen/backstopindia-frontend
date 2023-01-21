@@ -75,20 +75,24 @@ const Apply = () => {
           <h6>Joined : {moment(coustomer.createdAt).format("ll")}</h6>
           <h6>Expire : {moment(Number(coustomer.expire.date)).format("ll")}</h6>
         </div>
-        <h5>Congrats, {coustomer?.profile?.name}</h5>
-        <small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi officia, modi aut aliquam laudantium voluptatibus obcaecati facilis reprehenderit cumque vel nihil ad quae a quam quo debitis soluta tempora dolorem ea quos commodi! Assumenda omnis, est quia, perspiciatis fugiat reprehenderit molestias, debitis <b>corrupti</b> quo ad harum temporibus doloremque cumque adipisci!</small> <br /><br />
-        <p><b>As servised user of BACKSTOPINDIA you are subjected to the following conditions:- </b></p>
+        <h5>Congrats, {coustomer.profile?.name}</h5>
+
+        <p>Dear <b>{coustomer.profile?.name}</b>, your mobile protection plan is successfully compleated with <b>{coustomer.plans.imei}</b> IMEI number.
+          Also your activated plan is <b>₹ {coustomer.plans.plan.price}/-</b> for <b>{coustomer.plans.plan.duration}months</b> <small>{coustomer.plans.plan.duration * 28} days</small>. 
+          Your register phone number on this plan is <b>+91{coustomer.profile.phone}</b> and email is <b>{coustomer.profile.email}</b>. </p> <br />
+        
+        <p><b>As servises user of BACKSTOPINDIA you are subjected to the following conditions:- </b></p>
         <ol>
-          <li>Lorem ipsum dolor sit amet.</li>
-          <li>Lorem ipsum dolor sit amet.</li>
-          <li>Lorem ipsum dolor sit amet.</li>
+          <li>When phone condition is died means not able to use.</li>
+          <li>You can claim from mail or website.</li>
+          <li>After claime our team will contact soon.</li>
         </ol>
-        <p><b>Note :</b> Return a signed copy of this letter as your acceptance.</p><br />
+        <p><b>Note :</b> If your phone is already scretched or died then your service will cancelled and you will get refund 95% .</p><br />
         <div className='d-flex justify-content-between'>
           <div></div>
           <div style={{ maxWidth: "320px" }}>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="./assest/image/verified-stamp.png" alt="" width={150} /><br />
+            <img src="http://backstopindia.com/assest/image/verified-stamp.png" alt="" width={150} /><br />
             <AiOutlineGlobal size={20} color="darkgreen" /> www.backstopindia.com <br />
             <AiOutlineMail size={20} color="darkgreen" /> support@backstopindia.com <br />
             <AiOutlinePhone size={20} color="darkgreen" /> +919310348547 <br />
@@ -98,7 +102,7 @@ const Apply = () => {
       </div>
     </div>
   )
-
+ 
 
 
   const handleChange = (e) => {
@@ -191,7 +195,7 @@ const Apply = () => {
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item onClick={() => { model != "success" && navigate("/plans") }} active={location.path === "plans" || model === "success"}>Plans</Breadcrumb.Item>
           <Breadcrumb.Item active={model === "default" || model === "success"} onClick={() => { model != "success" && setModel("default") }}>Apply</Breadcrumb.Item>
-          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { model != "success" && setModel("upload") }}>Upload</Breadcrumb.Item>}
+          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { setModel("upload") }}>Upload</Breadcrumb.Item>}
           {(model === "payment" || model === "success") && <Breadcrumb.Item active={model === "payment" || model === "success"}>Payment</Breadcrumb.Item>}
         </Breadcrumb>
 
@@ -337,26 +341,6 @@ const Apply = () => {
 
         {
           model === "success" && (
-            // <div style={{ maxWidth: "600px" }} className='m-auto d-block'>
-
-            //   <h2>Congrates {coustomer?.profile?.name} </h2>
-            //   <Card className='text-dark' >
-            //     <Card.Header> <b>₹ {coustomer.plans?.plan.price}/-&nbsp;</b> {coustomer.plans?.plan.duration * 28} days  ({coustomer.plans?.duration}month)</Card.Header>
-            //     <Card.Body>
-            //       <Card.Title>{coustomer.plans?.plan.title}</Card.Title>
-            //       <Card.Text>{coustomer.plans?.plan.desc}</Card.Text>
-            //       &nbsp; <small>Name&nbsp; : </small> <b>{coustomer.profile?.name}</b> <br />
-            //       &nbsp; <small>Email &nbsp; : </small> <b> {coustomer.profile?.email}</b><br />
-            //       &nbsp; <small>Phone&ensp;: </small> <b> {coustomer.profile?.phone}</b><br />
-            //       &nbsp; <small>IMEI &ensp;&ensp;:</small> <b>{coustomer.plans?.imei}</b> <br />
-            //       &nbsp; <small>Joined : </small> <b>{moment(coustomer.createdAt).format("ll")}</b> <br />
-            //       &nbsp; <small>Expire&ensp;: </small> <b>{moment(Number(coustomer.expire.date)).format("ll")}</b> <br />
-            //       &nbsp; <small>Bill R. &ensp;: </small> <b style={{ color: "green" }}>File Uploaded </b> <br />
-            //       &nbsp; <small>Phone&nbsp;: </small> <b style={{ color: "green" }}> {coustomer.plans?.phoneImg.length} Image Uploaded </b> <br /><br />
-
-            //     </Card.Body>
-            //   </Card>  
-            // </div>
             <>
               <p>We have sended this pdf file in your email but you can take screenshot or download this pdf for claim in future.</p>
               <PdfHtml /> <br />
