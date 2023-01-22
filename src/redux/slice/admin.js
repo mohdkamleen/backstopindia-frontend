@@ -53,5 +53,6 @@ export const ServicesUser = (data) => authenticateUser({ method: 'post', endpoin
 
 // this is user function 
 export const patchUser = (data) => authenticateUser({ method: 'post', endpoint: 'patchUser', data }); 
+export const getCoustomer = (data) => authenticateUser({ method: 'post', endpoint: 'getCoustomer', data }); 
 export const updatePayment = (data) => authenticateUser({ method: 'post', endpoint: 'updatePayment', data }); 
 export default authSlice.reducer;   

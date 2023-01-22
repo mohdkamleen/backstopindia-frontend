@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../component/navbar'
 import Footer from '../component/footer'
 import { Breadcrumb, Button, Card, Form } from 'react-bootstrap'
-import { AiFillPlusCircle, AiOutlineGlobal, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
-import { CiLocationOn } from 'react-icons/ci'
+import { AiFillPlusCircle } from 'react-icons/ai' 
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -93,10 +92,10 @@ const Apply = () => {
           <div style={{ maxWidth: "320px" }}>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <img src="./assest/image/verified-stamp.png" alt="" width={150} /><br />
-            <AiOutlineGlobal size={20} color="darkgreen" /> www.backstopindia.com <br />
-            <AiOutlineMail size={20} color="darkgreen" /> support@backstopindia.com <br />
-            <AiOutlinePhone size={20} color="darkgreen" /> +919310348547 <br />
-            <CiLocationOn size={20} color="darkgreen" /> Sherwani Nagar, Lucknow UP 226021 <br />
+            <img src="./assest/image/globe-icon.png" height={20} /> &nbsp;www.backstopindia.com <br />
+            <img src="./assest/image/mail-icon.png" height={20} /> &nbsp;support@backstopindia.com <br />
+            <img src="./assest/image/phone-icon.png" height={20} /> &nbsp;+919310348547 <br />
+            <img src="./assest/image/location-icon.png" height={20} /> &nbsp;Sherwani Nagar, Lucknow UP 226021 <br />
           </div>
         </div>
       </div>
@@ -275,9 +274,7 @@ const Apply = () => {
 
                 <br />
 
-                <Form.Label>Upload Your Phone Image</Form.Label>
-
-
+                <Form.Label>Upload Your Phone Image</Form.Label> 
 
                 <input accept='image/*' style={{ display: "none" }} id='phone-image' type="file"
                   onChange={async (e) => {
@@ -290,7 +287,7 @@ const Apply = () => {
                   }} /> <br />
 
                 {plans.phoneImg.map((e, i) => (
-                  <img key={i} src={e} height="200" style={{ padding: "20px 5px" }} />
+                  <img key={i} src={e} height="200" />
                 ))}
 
                 {
@@ -342,7 +339,7 @@ const Apply = () => {
         {
           model === "success" && (
             <>
-              <p>We have sended this all information in your email also you can take screenshot or download this pdf for claim in future. Your plan url <a href={`https://www.backstopindia.com/${coustomer._id}`}> www.backstopindia.com/{coustomer._id}</a></p>
+              <p>We have sended this all information in your email if you did't get then you can take screenshot or download this pdf for claim in future. Your plan url <a href={`https://www.backstopindia.com/${coustomer._id}`}> www.backstopindia.com/{coustomer._id}</a></p>
               <PdfHtml /> <br />
               <Button onClick={handlePdf} className="d-block m-auto">Download Reciept {pdfLoading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />} </Button>
             </>

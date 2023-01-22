@@ -12,6 +12,7 @@ import Query from './admin/query'
 import AdminLogin from './admin/login'
 import User from './admin/user'
 import Apply from './pages/apply'
+import Coustomer from './pages/coustomer'
 
 const App = () => {
 
@@ -23,6 +24,8 @@ const App = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="services" element={<Services />} />
         <Route path="terms" element={<Terms />} />
+
+        <Route path=":id" element={<Coustomer />} />
 
         <Route path="plans" element={<Plans />} >
         </Route>
