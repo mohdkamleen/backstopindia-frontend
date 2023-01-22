@@ -92,7 +92,7 @@ const Apply = () => {
           <div></div>
           <div style={{ maxWidth: "320px" }}>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="http://backstopindia.com/assest/image/verified-stamp.png" alt="" width={150} /><br />
+            <img src="./assest/image/verified-stamp.png" alt="" width={150} /><br />
             <AiOutlineGlobal size={20} color="darkgreen" /> www.backstopindia.com <br />
             <AiOutlineMail size={20} color="darkgreen" /> support@backstopindia.com <br />
             <AiOutlinePhone size={20} color="darkgreen" /> +919310348547 <br />
@@ -195,7 +195,7 @@ const Apply = () => {
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item onClick={() => { model != "success" && navigate("/plans") }} active={location.path === "plans" || model === "success"}>Plans</Breadcrumb.Item>
           <Breadcrumb.Item active={model === "default" || model === "success"} onClick={() => { model != "success" && setModel("default") }}>Apply</Breadcrumb.Item>
-          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { setModel("upload") }}>Upload</Breadcrumb.Item>}
+          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { model != "success" && setModel("upload")}}>Upload</Breadcrumb.Item>}
           {(model === "payment" || model === "success") && <Breadcrumb.Item active={model === "payment" || model === "success"}>Payment</Breadcrumb.Item>}
         </Breadcrumb>
 
