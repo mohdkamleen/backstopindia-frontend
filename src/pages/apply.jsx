@@ -263,7 +263,7 @@ const Apply = () => {
                 }
 
 
-                <input style={{ display: "none" }} id='plan-bill-image' type="file"
+                <input accept='image/*' style={{ display: "none" }} id='plan-bill-image' type="file"
                   onChange={async (e) => {
                     setImageLoading(true);
                     var data = new FormData();
@@ -279,7 +279,7 @@ const Apply = () => {
 
 
 
-                <input style={{ display: "none" }} id='phone-image' type="file"
+                <input accept='image/*' style={{ display: "none" }} id='phone-image' type="file"
                   onChange={async (e) => {
                     setPhoneImgLoading(true);
                     var data = new FormData();
