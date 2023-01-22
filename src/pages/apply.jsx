@@ -342,7 +342,7 @@ const Apply = () => {
         {
           model === "success" && (
             <>
-              <p>We have sended this pdf file in your email but you can take screenshot or download this pdf for claim in future.</p>
+              <p>We have sended this all information in your email also you can take screenshot or download this pdf for claim in future. Your plan url <a href={`https://www.backstopindia.com/${coustomer._id}`}> www.backstopindia.com/{coustomer._id}</a></p>
               <PdfHtml /> <br />
               <Button onClick={handlePdf} className="d-block m-auto">Download Reciept {pdfLoading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />} </Button>
             </>
