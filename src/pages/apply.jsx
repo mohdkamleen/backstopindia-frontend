@@ -267,7 +267,7 @@ const Apply = () => {
                     setImageLoading(true);
                     var data = new FormData();
                     data.append("file", e.target.files[0])
-                    var res = await axios.post("http://localhost:8000/api/upload/image", data);
+                    var res = await axios.post("http://43.205.213.166:8000/api/upload/image", data);
                     res.data.path && await dispatch(addBill(res.data?.path));
                     setImageLoading(false);
                   }} /> <br />
@@ -281,7 +281,7 @@ const Apply = () => {
                     setPhoneImgLoading(true);
                     var data = new FormData();
                     data.append("file", e.target.files[0])
-                    var res = await axios.post("http://localhost:8000/api/upload/image", data);
+                    var res = await axios.post("http://43.205.213.166:8000/api/upload/image", data);
                     await dispatch(addPhoneImg(res.data?.path));
                     setPhoneImgLoading(false);
                   }} /> <br />
