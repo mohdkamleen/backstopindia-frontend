@@ -43,7 +43,7 @@ function FormModal() {
         }
         if (!agreed) return toast.warn("Please read our condition")
         const res = await dispatch(registeUser(formValue))
-        if (res) {
+        if (res?.payload) {
             window.localStorage.setItem("userContact", JSON.stringify(formValue)) 
             setShow(false)
             setAgreed(false)
