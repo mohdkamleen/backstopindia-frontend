@@ -7,7 +7,7 @@ import axios from 'axios';
  
 export default axios.create({ 
   baseURL: "http://43.205.213.166:8000/api", //for production mode
-  httpAgent:false,
+  httpsAgent:false,
   headers: {
     "Content-type": "application/json"
   }
