@@ -172,8 +172,8 @@ const Apply = () => {
 
 
   const handlePaymentAndRegister = async () => {
-    if (!plans.bill) return toast.warn("Pls insert your bill")
-    if (plans.phoneImg.length < 2) return toast.warn("Minimum two image required of phone")
+    // if (!plans.bill) return toast.warn("Pls insert your bill")
+    // if (plans.phoneImg.length < 2) return toast.warn("Minimum two image required of phone")
     const res = await dispatch(patchUser(user))
     console.log(res.payload);
     if (res.payload._id) {
@@ -281,7 +281,7 @@ const Apply = () => {
                     var data = new FormData();
                     data.append("file", e.target.files[0])
 
-                    var res = await axios.post("upload/image", data);
+                    var res = await axios.post("upload/image", {header:{"Access-Control-Allow-Origin":"*"}}, data);
 
                     await dispatch(addPhoneImg(res.data.path));
                     setPhoneImgLoading(false);
