@@ -260,8 +260,7 @@ const Apply = () => {
                       : <img src='./assest/image/loading.gif' width="50" style={{ padding: "20px 5px" }} />
                   )
                 }
-
-
+ 
                 <input accept='image/*' style={{ display: "none" }} id='plan-bill-image' type="file"
                   onChange={async (e) => {
                     setImageLoading(true);
