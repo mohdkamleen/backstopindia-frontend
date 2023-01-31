@@ -267,7 +267,7 @@ const Apply = () => {
                     setImageLoading(true);
                     var data = new FormData();
                     data.append("file", e.target.files[0])
-                    var res = await axios.post("https://easy-blue-indri-cap.cyclic.app/api/upload/image", data);
+                    var res = await axios.post("https://easy-blue-indri-cap.cyclic.app/api/upload/image", data); 
                     res.data.path && await dispatch(addBill(res.data?.path));
                     setImageLoading(false);
                   }} /> <br />
