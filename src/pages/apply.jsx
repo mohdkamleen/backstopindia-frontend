@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../component/navbar'
 import Footer from '../component/footer'
 import { Breadcrumb, Button, Card, Form } from 'react-bootstrap'
-import { AiFillPlusCircle } from 'react-icons/ai' 
+import { AiFillPlusCircle } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { updateUser } from '../redux/slice/user'
-import axios from 'axios'
 import useRazorpay from "react-razorpay";
 import { addBill, addPhoneImg, updateImei } from '../redux/slice/plans'
 import { patchUser, updatePayment } from '../redux/slice/admin'
 import { addAll } from '../redux/slice/coustomer'
 import moment from 'moment/moment'
 import { jsPDF } from "jspdf";
-import { useRef } from 'react'
+import { useRef } from 'react' 
+import axios from '../apis/axios'
 
 const Apply = () => {
   const user = useSelector(state => state)
@@ -77,9 +77,9 @@ const Apply = () => {
         <h5>Congrats, {coustomer.profile?.name}</h5>
 
         <p>Dear <b>{coustomer.profile?.name}</b>, your mobile protection plan is successfully compleated with <b>{coustomer.plans.imei}</b> IMEI number.
-          Also your activated plan is <b>₹ {coustomer.plans.plan.price}/-</b> for <b>{coustomer.plans.plan.duration}months</b> <small>{coustomer.plans.plan.duration * 28} days</small>. 
+          Also your activated plan is <b>₹ {coustomer.plans.plan.price}/-</b> for <b>{coustomer.plans.plan.duration}months</b> <small>{coustomer.plans.plan.duration * 28} days</small>.
           Your register phone number on this plan is <b>+91{coustomer.profile.phone}</b> and email is <b>{coustomer.profile.email}</b>. </p> <br />
-        
+
         <p><b>As servises user of BACKSTOPINDIA you are subjected to the following conditions:- </b></p>
         <ol>
           <li>When phone condition is died means not able to use.</li>
@@ -101,7 +101,7 @@ const Apply = () => {
       </div>
     </div>
   )
- 
+
 
 
   const handleChange = (e) => {
@@ -194,7 +194,7 @@ const Apply = () => {
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item onClick={() => { model != "success" && navigate("/plans") }} active={location.path === "plans" || model === "success"}>Plans</Breadcrumb.Item>
           <Breadcrumb.Item active={model === "default" || model === "success"} onClick={() => { model != "success" && setModel("default") }}>Apply</Breadcrumb.Item>
-          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { model != "success" && setModel("upload")}}>Upload</Breadcrumb.Item>}
+          {(model === "upload" || model === "payment" || model === "success") && <Breadcrumb.Item active={model === "upload" || model === "success"} onClick={() => { model != "success" && setModel("upload") }}>Upload</Breadcrumb.Item>}
           {(model === "payment" || model === "success") && <Breadcrumb.Item active={model === "payment" || model === "success"}>Payment</Breadcrumb.Item>}
         </Breadcrumb>
 
@@ -260,28 +260,30 @@ const Apply = () => {
                       : <img src='./assest/image/loading.gif' width="50" style={{ padding: "20px 5px" }} />
                   )
                 }
- 
+
                 <input accept='image/*' style={{ display: "none" }} id='plan-bill-image' type="file"
                   onChange={async (e) => {
                     setImageLoading(true);
                     var data = new FormData();
                     data.append("file", e.target.files[0])
-                    var res = await axios.post("https://easy-blue-indri-cap.cyclic.app/api/upload/image", data); 
-                    res.data.path && await dispatch(addBill(res.data?.path));
+                    var res = await axios.post("upload/image", data);
+                    await dispatch(addBill(res.data.path));
                     setImageLoading(false);
                   }} /> <br />
 
                 <br />
 
-                <Form.Label>Upload Your Phone Image</Form.Label> 
+                <Form.Label>Upload Your Phone Image</Form.Label>
 
                 <input accept='image/*' style={{ display: "none" }} id='phone-image' type="file"
                   onChange={async (e) => {
                     setPhoneImgLoading(true);
                     var data = new FormData();
                     data.append("file", e.target.files[0])
-                    var res = await axios.post("https://easy-blue-indri-cap.cyclic.app/api/upload/image", data);
-                    await dispatch(addPhoneImg(res.data?.path));
+
+                    var res = await axios.post("upload/image", data);
+
+                    await dispatch(addPhoneImg(res.data.path));
                     setPhoneImgLoading(false);
                   }} /> <br />
 

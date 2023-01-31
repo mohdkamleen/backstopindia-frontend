@@ -79,7 +79,7 @@ function FormModal() {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Imei number (optional) </Form.Label>
-                            <Form.Control name='imei' onChange={handleChange} value={formValue.imei} type="tel" placeholder="Enter phone" />
+                            <Form.Control name='imei' onChange={handleChange} value={formValue.imei} type="tel" placeholder="Enter IMEI" />
                         </Form.Group>
 
                         <Button variant="secondary" size="sm" onClick={handleClose} >

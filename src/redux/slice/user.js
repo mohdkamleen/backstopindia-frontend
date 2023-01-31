@@ -27,7 +27,7 @@ const userSlice = createSlice({
       .addCase(registeUser.fulfilled, (state, action) => {
         console.log("success");
         state.loading = false
-        state.profile = action.payload.profile 
+        state.profile = action.payload?.profile 
       })
       .addCase(registeUser.rejected, (state, action) => {
         console.log("error");
