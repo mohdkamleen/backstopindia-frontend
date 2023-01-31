@@ -9,14 +9,14 @@ import { registeUser } from '../redux/slice/user';
 function FormModal() {
 
     const defaultValue = {
-        name :"",
-        email :"",
-        phone:""
+        name: "",
+        email: "",
+        phone: ""
     }
-   
+
     useEffect(() => {
-       JSON.parse(window.localStorage.getItem("userContact")) && setFormValue(JSON.parse(window.localStorage.getItem("userContact")))
-    },[])
+        JSON.parse(window.localStorage.getItem("userContact")) && setFormValue(JSON.parse(window.localStorage.getItem("userContact")))
+    }, [])
 
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.user)
@@ -35,16 +35,16 @@ function FormModal() {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (formValue.name === "" || formValue.email === "" || formValue.phone === "" ) {
+        if (formValue.name === "" || formValue.email === "" || formValue.phone === "") {
             return toast.warn("All feilds are required")
         }
-        if (formValue.phone.length != 10 || String(formValue.phone)[0] == 0 || String(formValue.phone)[0] == 1 || String(formValue.phone)[0] == 2 || String(formValue.phone)[0] == 3 || String(formValue.phone)[0] == 4 || String(formValue.phone)[0] == 5 ) {
+        if (formValue.phone.length != 10 || String(formValue.phone)[0] == 0 || String(formValue.phone)[0] == 1 || String(formValue.phone)[0] == 2 || String(formValue.phone)[0] == 3 || String(formValue.phone)[0] == 4 || String(formValue.phone)[0] == 5) {
             return toast.warn("Please type valid phone no.")
         }
         if (!agreed) return toast.warn("Please read our condition")
         const res = await dispatch(registeUser(formValue))
         if (res?.payload) {
-            window.localStorage.setItem("userContact", JSON.stringify(formValue)) 
+            window.localStorage.setItem("userContact", JSON.stringify(formValue))
             setShow(false)
             setAgreed(false)
         }
@@ -92,7 +92,7 @@ function FormModal() {
                         Cancel
                     </Button>
                     <Button onClick={handleSubmit} variant="primary" size="sm" >
-                        Submit and get call from us  { loading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />} 
+                        Submit and get call from us  {loading && <img src="./assest/image/loading.gif" width={20} style={{ marginBottom: "5px" }} />}
                     </Button>
                 </Modal.Footer>
             </Modal>
