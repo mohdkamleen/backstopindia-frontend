@@ -281,7 +281,7 @@ const Apply = () => {
                     var data = new FormData();
                     data.append("file", e.target.files[0])
 
-                    var res = await axios.post("upload/image", {header:{"Access-Control-Allow-Origin":"*"}}, data);
+                    var res = await axios.post("upload/image", data);
 
                     await dispatch(addPhoneImg(res.data.path));
                     setPhoneImgLoading(false);
