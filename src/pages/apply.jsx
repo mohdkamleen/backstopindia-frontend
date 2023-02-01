@@ -172,8 +172,8 @@ const Apply = () => {
 
 
   const handlePaymentAndRegister = async () => {
-    // if (!plans.bill) return toast.warn("Pls insert your bill")
-    // if (plans.phoneImg.length < 2) return toast.warn("Minimum two image required of phone")
+    if (!plans.bill) return toast.warn("Pls insert your bill")
+    if (plans.phoneImg.length < 2) return toast.warn("Minimum two image required of phone")
     const res = await dispatch(patchUser(user))
     console.log(res.payload);
     if (res.payload._id) {
