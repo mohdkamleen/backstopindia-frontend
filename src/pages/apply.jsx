@@ -247,7 +247,7 @@ const Apply = () => {
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Upload Your Bill Receipt</Form.Label> <br />
 
-                {plans.bill && <img src={plans.bill} height={200} />}
+                {plans.bill && <img src={plans.bill} style={{maxWidth:"500px",width:"100%"}} />}
 
                 {
                   !plans.bill && (
@@ -288,7 +288,7 @@ const Apply = () => {
                   }} /> <br />
 
                 {plans.phoneImg.map((e, i) => (
-                  <img key={i} src={e} height="200" />
+                  <img key={i} src={e} style={{maxWidth:"500px",width:"100%"}} />
                 ))}
 
                 {
